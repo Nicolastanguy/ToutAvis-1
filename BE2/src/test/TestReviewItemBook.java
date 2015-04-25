@@ -94,8 +94,14 @@ public class TestReviewItemBook {
 			int nbErreurs = 0;
 			
 			System.out.println("Tests  ajouter des avis sur des livres  ");
+			try{
+				SocialNetwork sn = TestCreationSN.createNewSocialNetwork();
+			}
+			catch(Exception e){
+				System.out.println("Erreur lors de la création du SN de test");
+			}
 			
-			SocialNetwork sn = TestCreationSN.createNewSocialNetwork();
+			//Tests de reviewItemBook
 	}
 
 }
