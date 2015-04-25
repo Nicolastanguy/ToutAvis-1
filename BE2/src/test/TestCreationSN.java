@@ -14,26 +14,25 @@ import avis.SocialNetwork;
 
 public class TestCreationSN {
 	
-	public static SocialNetwork createNewSocialNetwork() throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists{
+	public static SocialNetwork createNewSocialNetwork() throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists {
 		
 		SocialNetwork sn = new SocialNetwork();
-		//Ajout de 3 membres au réseau social		
-			sn.addMember("Personne1","psw1","haha");
-			sn.addMember("Personne2","psw2","hoho");
-			sn.addMember("Personne3","psw3","hihi");		
+		//Ajout de 3 membres au réseau social
+		sn.addMember("Personne1","psw1","haha");
+		sn.addMember("Personne2","psw2","hoho");
+		sn.addMember("Personne3","psw3","hihi");
 		
-		//Ajout de 3 livres au réseau social		
-			sn.addItemBook("Personne1", "psw1", "Arts martiaux", "Documentaire", "Jackie Chan", 150);
-			sn.addItemBook("Personne2", "psw2", "La Chine", "Histoire", "Yang Ping Pong", 328);
-			sn.addItemBook("Personne3", "psw3", "Coupe du monde football", "Sport", "Zinedine Zidane", 12);
-				
-		//Ajout de 3 films au réseau social	
-			sn.addItemFilm("Personne1", "psw1", "Interstellar", "Science-fiction", "Christopher Nolan", "Christopher Nolan", 169);
-			sn.addItemFilm("Personne2", "psw2", "Matrix", "Action", "Andy Wachowski", "Lana Wachowski", 130);
-			sn.addItemFilm("Personne3", "psw3", "Titanic", "Drame", "James Cameron", "James Cameron", 194);
-			
-		return sn; //Retourne le réseau social créé
+		//Ajout de 3 livres au réseau social
+		sn.addItemBook("Personne1", "psw1", "Arts martiaux", "Documentaire", "Jackie Chan", 150);
+		sn.addItemBook("Personne2", "psw2", "La Chine", "Histoire", "Yang Ping Pong", 328);
+		sn.addItemBook("Personne3", "psw3", "Coupe du monde football", "Sport", "Zinedine Zidane", 12);
 		
+		//Ajout de 3 films au réseau social
+		sn.addItemFilm("Personne1", "psw1", "Interstellar", "Science-fiction", "Christopher Nolan", "Christopher Nolan", 169);
+		sn.addItemFilm("Personne2", "psw2", "Matrix", "Action", "Andy Wachowski", "Lana Wachowski", 130);
+		sn.addItemFilm("Personne3", "psw3", "Titanic", "Drame", "James Cameron", "James Cameron", 194);
+		
+		//Retourne le réseau social créé
+		return sn;
 	}
-	
 }
