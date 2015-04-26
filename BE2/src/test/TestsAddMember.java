@@ -20,7 +20,6 @@ import exception.NotMember;
 public class TestsAddMember {
 
 
-
 	public static int addMemberBadEntryTest (SocialNetwork sn, String pseudo, String pwd, String profil, String idTest, String messErreur){
 		// vérifie que l'ajout d'un membre (pseudo, pwd, profil) est refusée (levée de l'exception BadEntry et  pas de modification du sn)
 		// si c'est bien le cas, ne fait rien
@@ -89,7 +88,7 @@ public class TestsAddMember {
 
 
 
-	public static void main(String[] args) {
+	public static void sequenceTestsAddMember() {
 
 		int nbLivres = 0;
 		int nbFilms = 0;
@@ -157,11 +156,11 @@ public class TestsAddMember {
 			nbErreurs++;
 		}
 
-		// ce n'est pas du test, mais cela peut "rassurer"...
-		System.out.println(sn);
-
 		// bilan du test de addMember
 		System.out.println("TestsAddMember :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
+		
+		TestSocialNetwork.nbTests += nbTests;
+		TestSocialNetwork.nbErreurs += nbErreurs;	
 
 	}
 }
