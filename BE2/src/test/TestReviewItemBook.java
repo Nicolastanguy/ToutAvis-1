@@ -5,7 +5,7 @@ import avis.SocialNetwork;
 import test.TestCreationSN;
 
 
-public class TestReviewItemBook {
+public class TestReviewItemBook{
 	
 	public static int reviewItemBookBadEntryTest (SocialNetwork sn,String pseudo,
 													String password,String titre,
@@ -88,13 +88,14 @@ public class TestReviewItemBook {
 	}	
 	
 	
-	public static void main(String[] args) {
+	public static void sequenceTestReviewItemBook() {
 		
-			int nbTests = 0;
-			int nbErreurs = 0;
 			int nbMembers = 0;
 			int nbFilms = 0;
-			int nbLivres = 0;			
+			int nbLivres = 0;	
+			
+			int nbTests = 0;
+			int nbErreurs = 0;
 			
 			SocialNetwork sn = null;
 			
@@ -178,24 +179,26 @@ public class TestReviewItemBook {
 			nbTests ++;
 			nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "psw1", "LivreInconnu",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 2.2");
 			
-			nbTests++;
+			TestSocialNetwork.nbTests++;
 			if (sn.nbBooks()!=nbLivres){
 				System.out.println("Erreur  :  le nombre de livres après utilisation de reviewItemBook a été modifié");
 				nbErreurs++;
 			}
-			nbTests++;
+			TestSocialNetwork.nbTests++;
 			if (sn.nbMembers()!=nbMembers){
 				System.out.println("Erreur  :  le nombre de membres après utilisation de reviewItemBook a été modifié");
 				nbErreurs++;
 			}
-			nbTests++;
+			TestSocialNetwork.nbTests++;
 			if (sn.nbFilms()!=nbFilms){
 				System.out.println("Erreur  :  le nombre de films après utilisation de reviewItemBook a été modifié");
 				nbErreurs++;
 			}
-			
-			// bilan du test de reviewItemBook
+			// bilan du test de ReviewItemBook
 			System.out.println("TestsReviewItemBook :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
+			
+			TestSocialNetwork.nbTests += nbTests;
+			TestSocialNetwork.nbErreurs += nbErreurs;			
 	}
 
 }
