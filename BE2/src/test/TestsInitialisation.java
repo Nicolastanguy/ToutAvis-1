@@ -20,7 +20,7 @@ import exception.NotMember;
 public class TestsInitialisation {
 
 
-	public static void main(String[] args) {
+	public static void sequenceTestsInitialisation() {
 		// TODO Auto-generated method stub
 
 		int nbMembres = 0;
