@@ -1,15 +1,8 @@
 package test;
 
-import java.util.LinkedList;
-
 import avis.SocialNetwork;
-
 import exception.BadEntry;
-import exception.ItemFilmAlreadyExists;
-import exception.ItemBookAlreadyExists;
 import exception.MemberAlreadyExists;
-import exception.NotItem;
-import exception.NotMember;
 
 /** 
  * @author B. Prou, E. Cousin
@@ -157,7 +150,7 @@ public class TestsAddMember {
 		}
 
 		// bilan du test de addMember
-		System.out.println("TestsAddMember :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
+		System.out.println("TestsAddMember :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués\n");
 		
 		TestSocialNetwork.nbTests += nbTests;
 		TestSocialNetwork.nbErreurs += nbErreurs;	

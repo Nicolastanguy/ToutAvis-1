@@ -11,11 +11,11 @@ public class TestSocialNetwork {
 		System.out.println("---TestAddMember---");
 		TestsAddMember.sequenceTestsAddMember();
 		System.out.println("---TestAddItemBook---");
-		
+		TestAddItemBook.sequenceTestAddItemBook(); //Test de addItemBook
 		System.out.println("---TestAddItemFilm---");
 		
 		System.out.println("---TestReviewItemBook---");
-		TestReviewItemBook.sequenceTestReviewItemBook(); //Test de ReviewItemBook
+		TestReviewItemBook.sequenceTestReviewItemBook(); //Test de reviewItemBook
 		System.out.println("---TestReviewItemFilm---");
 		
 		System.out.println("--------------------------------------------");
