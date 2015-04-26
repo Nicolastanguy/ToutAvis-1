@@ -10,9 +10,6 @@ import exception.NotMember;
 public class TestAddItemBook {
 	
 	public static int addItemBookBadEntryTest (SocialNetwork sn, String pseudo, String pwd, String titre, String genre, String auteur, int nbPages, String idTest, String messErreur){
-		// vérifie que l'ajout d'un livre (pseudo, pwd, titre, genre, auteur, nbPages) est refusée (levée de l'exception BadEntry et  pas de modification du sn)
-		// si c'est bien le cas, ne fait rien
-		// sinon, affiche le message d'erreur passé en paramètre
 		int nbBooks = sn.nbBooks();
 		try {
 			sn.addItemBook (pseudo, pwd, titre, genre, auteur, nbPages);
@@ -165,7 +162,7 @@ public class TestAddItemBook {
 		nbTests++;
 		nbErreurs += addItemBookOKTest ( sn, "Personne1", "psw1", "titre3", "genre3", "auteur3", 10, "4.1c");
 		
-		// tentative d'ajout de livre avec un membre "inexistant"
+		// tentative d'ajout de livres avec un membre "inexistant"
 		
 		nbTests++;
 		nbErreurs += addItemBookNotMemberTest ( sn, "membreInexistant", "password", "", "", "", 10, "4.2", "L'ajout d'un livre avec un membre inexistant est accepté");

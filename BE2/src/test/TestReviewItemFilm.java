@@ -110,73 +110,73 @@ public class TestReviewItemFilm{
 			nbLivres = sn.nbBooks();
 			nbFilms = sn.nbFilms();
 			
-			// <=> Fiche 1 : Eprouver la méthode reviewItemFilm sur les cas d’anomalies BadEntry.			
-			//1.1a   
+			// <=> Fiche 9 : Eprouver la méthode reviewItemFilm sur les cas d’anomalies BadEntry.			
+			//9.1a   
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,null,"psw1","Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 1.1a"); //pseudo incorrect 
-			//1.1b   
+			nbErreurs += reviewItemFilmBadEntryTest(sn,null,"psw1","Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 9.1a"); //pseudo incorrect 
+			//9.1b   
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,"     ","psw1","Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 1.1b"); //pseudo incorrect 
-			//1.2a
+			nbErreurs += reviewItemFilmBadEntryTest(sn,"     ","psw1","Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 9.1b"); //pseudo incorrect 
+			//9.2a
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1",null,"Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 1.2"); //password incorrect
-			//1.2b
+			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1",null,"Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 9.2"); //password incorrect
+			//9.2b
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","  a   ","Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 1.2"); //password incorrect
-			//1.3a
+			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","  a   ","Interstellar",1.3F,"Bien bien bien!","TestReviewItemFilm : 9.2"); //password incorrect
+			//9.3a
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1",null,1.3F,"Bien bien bien!","TestReviewItemFilm : 1.3"); //titre livre incorrect
-			//1.3b
+			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1",null,1.3F,"Bien bien bien!","TestReviewItemFilm : 9.3"); //titre livre incorrect
+			//9.3b
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1","    ",1.3F,"Bien bien bien!","TestReviewItemFilm : 1.3"); //titre livre incorrect
-			//1.4
+			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1","    ",1.3F,"Bien bien bien!","TestReviewItemFilm : 9.3"); //titre livre incorrect
+			//9.4
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1","Interstellar",7.0F,"Bien bien bien!","TestReviewItemFilm : 1.4"); //note incorrecte
-			//1.5
+			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1","Interstellar",7.0F,"Bien bien bien!","TestReviewItemFilm : 9.4"); //note incorrecte
+			//9.5
 			nbTests ++;
-			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1","Interstellar",1.3F,null,"TestReviewItemFilm : 1.5"); //Commentaire incorrect
+			nbErreurs += reviewItemFilmBadEntryTest(sn,"Personne1","psw1","Interstellar",1.3F,null,"TestReviewItemFilm : 9.5"); //Commentaire incorrect
 			
 			
-			// <=> Fiche 2 : Eprouver la méthode reviewItemFilm dans le cas d’un fonctionnement standard.
+			// <=> Fiche 10 : Eprouver la méthode reviewItemFilm dans le cas d’un fonctionnement standard.
 			
-			//2.1 Ajout d'avis sur des films : les 3 membres postent un avis sur chacun des films
-			//2.1a
+			//10.1 Ajout d'avis sur des films : les 3 membres postent un avis sur chacun des films
+			//10.1a
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne1", "psw1", "Interstellar",4.5F,"Super","TestReviewItemFilm : 2.1a");
-			//2.1b
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne1", "psw1", "Interstellar",4.5F,"Super","TestReviewItemFilm : 10.1a");
+			//10.1b
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne2", "psw2", "Interstellar",4.8F,"Grandiose","TestReviewItemFilm : 2.1b");
-			//2.1c
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne2", "psw2", "Interstellar",4.8F,"Grandiose","TestReviewItemFilm : 10.1b");
+			//10.1c
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne3", "psw3", "Interstellar",2.1F,"Trop complexe...","TestReviewItemFilm : 2.1c");
-			//2.1d
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne3", "psw3", "Interstellar",2.1F,"Trop complexe...","TestReviewItemFilm : 10.1c");
+			//10.1d
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne1", "psw1", "Matrix",2.1F,"Bon film d'action, sans plus","TestReviewItemFilm : 2.1d");
-			//2.1e
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne1", "psw1", "Matrix",2.1F,"Bon film d'action, sans plus","TestReviewItemFilm : 10.1d");
+			//10.1e
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne2", "psw2", "Matrix",4.5F,"un classique","TestReviewItemFilm : 2.1e");
-			//2.1f
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne2", "psw2", "Matrix",4.5F,"un classique","TestReviewItemFilm : 10.1e");
+			//10.1f
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne3", "psw3", "Matrix",2.3F,"N'importe quoi!","TestReviewItemFilm : 2.1f");
-			//2.1g
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne3", "psw3", "Matrix",2.3F,"N'importe quoi!","TestReviewItemFilm : 10.1f");
+			//10.1g
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne1", "psw1","Titanic",3.7F,"Coule coule bateau coule","TestReviewItemFilm : 2.1g");
-			//2.1h
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne1", "psw1","Titanic",3.7F,"Coule coule bateau coule","TestReviewItemFilm : 10.1g");
+			//10.1h
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne2", "psw2","Titanic",1.5F,"Nian nian","TestReviewItemFilm : 2.1h");
-			//2.1i
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne2", "psw2","Titanic",1.5F,"Nian nian","TestReviewItemFilm : 10.1h");
+			//10.1i
 			nbTests ++;
-			nbErreurs += reviewItemFilmOKTest(sn,"Personne3", "psw3","Titanic",3.9F,"Un succès","TestReviewItemFilm : 2.1i");
+			nbErreurs += reviewItemFilmOKTest(sn,"Personne3", "psw3","Titanic",3.9F,"Un succès","TestReviewItemFilm : 10.1i");
 			
-			//2.2
+			//10.2
 			nbTests ++;
-			nbErreurs += reviewItemFilmNotMemberTest (sn,"PersonneInconnue", "psw1", "Matrix",4.5F,"blabla","TestReviewItemFilm : 2.2");
-			//2.3
+			nbErreurs += reviewItemFilmNotMemberTest (sn,"PersonneInconnue", "psw1", "Matrix",4.5F,"blabla","TestReviewItemFilm : 10.2");
+			//10.3
 			nbTests ++;
-			nbErreurs += reviewItemFilmNotMemberTest (sn,"Personne1", "pswMauvais", "Matrix",4.5F,"blablabla","TestReviewItemFilm : 2.2");
-			//2.4
+			nbErreurs += reviewItemFilmNotMemberTest (sn,"Personne1", "pswMauvais", "Matrix",4.5F,"blablabla","TestReviewItemFilm : 10.2");
+			//10.4
 			nbTests ++;
-			nbErreurs += reviewItemFilmNotMemberTest (sn,"Personne1", "psw1", "Matrix",4.5F,"okokok","TestReviewItemFilm : 2.2");
+			nbErreurs += reviewItemFilmNotMemberTest (sn,"Personne1", "psw1", "Matrix",4.5F,"okokok","TestReviewItemFilm : 10.2");
 			
 			TestSocialNetwork.nbTests++;
 			if (sn.nbBooks()!=nbLivres){
@@ -194,7 +194,7 @@ public class TestReviewItemFilm{
 				nbErreurs++;
 			}
 			// bilan du test de ReviewItemFilm
-			System.out.println("TestsReviewItemFilm :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
+			System.out.println("TestsReviewItemFilm :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués\n");
 			
 			TestSocialNetwork.nbTests += nbTests;
 			TestSocialNetwork.nbErreurs += nbErreurs;			

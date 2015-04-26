@@ -108,73 +108,73 @@ public class TestReviewItemBook{
 		int nbTests = 0;
 		int nbErreurs = 0;
 		
-		// <=> Fiche 1 : Eprouver la méthode reviewItemBook sur les cas d’anomalies BadEntry.			
-		//1.1a   
+		// <=> Fiche 7 : Eprouver la méthode reviewItemBook sur les cas d’anomalies BadEntry.			
+		//7.1a   
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,null,"psw1","superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 1.1a"); //pseudo incorrect 
-		//1.1b   
+		nbErreurs += reviewItemBookBadEntryTest(sn,null,"psw1","superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 7.1a"); //pseudo incorrect 
+		//7.1b   
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,"     ","psw1","superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 1.1b"); //pseudo incorrect 
-		//1.2a
+		nbErreurs += reviewItemBookBadEntryTest(sn,"     ","psw1","superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 7.1b"); //pseudo incorrect 
+		//7.2a
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1",null,"superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 1.2"); //password incorrect
-		//1.2b
+		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1",null,"superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 7.2"); //password incorrect
+		//7.2b
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","  a   ","superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 1.2"); //password incorrect
-		//1.3a
+		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","  a   ","superlivre1",1.3F,"Bien bien bien!","TestReviewItemBook : 7.2"); //password incorrect
+		//7.3a
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1",null,1.3F,"Bien bien bien!","TestReviewItemBook : 1.3"); //titre livre incorrect
-		//1.3b
+		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1",null,1.3F,"Bien bien bien!","TestReviewItemBook : 7.3"); //titre livre incorrect
+		//7.3b
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1","    ",1.3F,"Bien bien bien!","TestReviewItemBook : 1.3"); //titre livre incorrect
-		//1.4
+		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1","    ",1.3F,"Bien bien bien!","TestReviewItemBook : 7.3"); //titre livre incorrect
+		//7.4
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1","superlivre1",7.0F,"Bien bien bien!","TestReviewItemBook : 1.4"); //note incorrecte
-		//1.5
+		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1","superlivre1",7.0F,"Bien bien bien!","TestReviewItemBook : 7.4"); //note incorrecte
+		//7.5
 		nbTests ++;
-		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1","superlivre1",1.3F,null,"TestReviewItemBook : 1.5"); //Commentaire incorrect
+		nbErreurs += reviewItemBookBadEntryTest(sn,"Personne1","psw1","superlivre1",1.3F,null,"TestReviewItemBook : 7.5"); //Commentaire incorrect
 		
 		
-		// <=> Fiche 2 : Eprouver la méthode reviewItemBook dans le cas d’un fonctionnement standard.
+		// <=> Fiche 8 : Eprouver la méthode reviewItemBook dans le cas d’un fonctionnement standard.
 		
-		//2.1 Ajout d'avis sur des livres : les 3 membres postent un avis sur les livres qu'ils ont posté
-		//2.1a
+		//8.1 Ajout d'avis sur des livres : les 3 membres postent un avis sur les livres qu'ils ont posté
+		//8.1a
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne1", "psw1", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 2.1a");
-		//2.1b
+		nbErreurs += reviewItemBookOKTest(sn,"Personne1", "psw1", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.1a");
+		//8.1b
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne2", "psw2", "La Chine",3.2F,"Beau livre mais incomplet","TestReviewItemBook : 2.1b");
-		//2.1c
+		nbErreurs += reviewItemBookOKTest(sn,"Personne2", "psw2", "La Chine",3.2F,"Beau livre mais incomplet","TestReviewItemBook : 8.1b");
+		//8.1c
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne3", "psw3", "Coupe du monde football",4.2F,"Vive le foot","TestReviewItemBook : 2.1c");
-		//2.1d
+		nbErreurs += reviewItemBookOKTest(sn,"Personne3", "psw3", "Coupe du monde football",4.2F,"Vive le foot","TestReviewItemBook : 8.1c");
+		//8.1d
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne1", "psw1", "La Chine",2.1F,"Un peu perdu dans ce long livre","TestReviewItemBook : 2.1d");
-		//2.1e
+		nbErreurs += reviewItemBookOKTest(sn,"Personne1", "psw1", "La Chine",2.1F,"Un peu perdu dans ce long livre","TestReviewItemBook : 8.1d");
+		//8.1e
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne2", "psw2", "Arts martiaux",4.5F,"Une belle surprise","TestReviewItemBook : 2.1e");
-		//2.1f
+		nbErreurs += reviewItemBookOKTest(sn,"Personne2", "psw2", "Arts martiaux",4.5F,"Une belle surprise","TestReviewItemBook : 8.1e");
+		//8.1f
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne3", "psw3", "Arts martiaux",2.3F,"Beaucoup d'erreurs","TestReviewItemBook : 2.1f");
-		//2.1g
+		nbErreurs += reviewItemBookOKTest(sn,"Personne3", "psw3", "Arts martiaux",2.3F,"Beaucoup d'erreurs","TestReviewItemBook : 8.1f");
+		//8.1g
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne1", "psw1","Coupe du monde football",3.7F,"Pas mal, meme sans aimer le foot","TestReviewItemBook : 2.1g");
-		//2.1h
+		nbErreurs += reviewItemBookOKTest(sn,"Personne1", "psw1","Coupe du monde football",3.7F,"Pas mal, meme sans aimer le foot","TestReviewItemBook : 8.1g");
+		//8.1h
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne2", "psw2", "Coupe du monde football",1.5F,"Rien a foot du foot","TestReviewItemBook : 2.1h");
-		//2.1i
+		nbErreurs += reviewItemBookOKTest(sn,"Personne2", "psw2", "Coupe du monde football",1.5F,"Rien a foot du foot","TestReviewItemBook : 8.1h");
+		//8.1i
 		nbTests ++;
-		nbErreurs += reviewItemBookOKTest(sn,"Personne3", "psw3", "La Chine",3.1F,"Xio Ping Ping","TestReviewItemBook : 2.1i");
+		nbErreurs += reviewItemBookOKTest(sn,"Personne3", "psw3", "La Chine",3.1F,"Xio Ping Ping","TestReviewItemBook : 8.1i");
 		
-		//2.2
+		//8.2
 		nbTests ++;
-		nbErreurs += reviewItemBookNotMemberTest (sn,"PersonneInconnue", "psw1", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 2.2");
-		//2.3
+		nbErreurs += reviewItemBookNotMemberTest (sn,"PersonneInconnue", "psw1", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.2");
+		//8.3
 		nbTests ++;
-		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "pswMauvais", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 2.2");
-		//2.4
+		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "pswMauvais", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.2");
+		//8.4
 		nbTests ++;
-		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "psw1", "LivreInconnu",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 2.2");
+		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "psw1", "LivreInconnu",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.2");
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbBooks()!=nbBooks){
@@ -193,7 +193,7 @@ public class TestReviewItemBook{
 		}
 		
 		// bilan du test de ReviewItemBook
-		System.out.println("TestsReviewItemBook :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
+		System.out.println("TestsReviewItemBook :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués\n");
 		
 		TestSocialNetwork.nbTests += nbTests;
 		TestSocialNetwork.nbErreurs += nbErreurs;			
