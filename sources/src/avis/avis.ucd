@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1101,551" id="avis" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D3130303020736F75726365732F6A6F7264616E">
+  <children xsi:type="editmodel:ClassEditModel" name="IHM" location="15,30" size="175,283" id="avis/IHM" runTimeClassModel="commentaireMembre,genreFilm,genreLivre,scenaristeFilm,IHM(),noteMembre,dureeFilm,main([Ljava.lang.String;),nbPagesLivre,auteurLivre,realisateurFilm,titreLivre,titreFilm">
+    <children xsi:type="editmodel:CompartmentEditModel" size="152,198">
+      <children xsi:type="editmodel:AttributeEditModel" name="auteurLivre" id="avis/IHM#auteurLivre"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="commentaireMembre" id="avis/IHM#commentaireMembre"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="dureeFilm" id="avis/IHM#dureeFilm"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="genreFilm" id="avis/IHM#genreFilm"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="genreLivre" id="avis/IHM#genreLivre"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nbPagesLivre" id="avis/IHM#nbPagesLivre"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="noteMembre" id="avis/IHM#noteMembre"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="realisateurFilm" id="avis/IHM#realisateurFilm"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="scenaristeFilm" id="avis/IHM#scenaristeFilm"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="titreFilm" id="avis/IHM#titreFilm"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="titreLivre" id="avis/IHM#titreLivre"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="52,36">
+      <children xsi:type="editmodel:MethodEditModel" name="IHM" id="avis/IHM#IHM()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="main" id="avis/IHM#main([Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="SocialNetwork" location="585,45" size="134,301" id="avis/SocialNetwork" runTimeClassModel="addItemBook(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;I),toString(),nbMembers,nbBooks,reviewItemBook(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;FLjava.lang.String;),addItemFilm(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;I),addMember(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),nbFilms,reviewItemFilm(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;FLjava.lang.String;),nbMembers(),consultItems(Ljava.lang.String;),nbBooks(),nbFilms(),SocialNetwork()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="92,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="nbBooks" id="avis/SocialNetwork#nbBooks"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nbFilms" id="avis/SocialNetwork#nbFilms"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="nbMembers" id="avis/SocialNetwork#nbMembers"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="107,198">
+      <children xsi:type="editmodel:MethodEditModel" name="SocialNetwork" id="avis/SocialNetwork#SocialNetwork()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addItemBook" id="avis/SocialNetwork#addItemBook(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addItemFilm" id="avis/SocialNetwork#addItemFilm(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addMember" id="avis/SocialNetwork#addMember(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="consultItems" id="avis/SocialNetwork#consultItems(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="nbBooks" id="avis/SocialNetwork#nbBooks()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="nbFilms" id="avis/SocialNetwork#nbFilms()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="nbMembers" id="avis/SocialNetwork#nbMembers()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="reviewItemBook" id="avis/SocialNetwork#reviewItemBook(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;FLjava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="reviewItemFilm" id="avis/SocialNetwork#reviewItemFilm(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;FLjava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="avis/SocialNetwork#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true" showAssociationMember="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Members" location="330,135" size="100,29" id="avis/Members" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Opinions" location="345,284" size="98,29" id="avis/Opinions" runTimeClassModel="">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

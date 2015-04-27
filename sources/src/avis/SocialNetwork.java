@@ -44,6 +44,10 @@ import exception.NotMember;
  */
 
 public class SocialNetwork {
+	
+	private static int nbMembers = 0;
+	private static int nbBooks = 0;
+	private static int nbFilms = 0;
 
 
 	/**
