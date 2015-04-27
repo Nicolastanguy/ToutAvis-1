@@ -1,5 +1,5 @@
 package test;
-
+test
 import avis.SocialNetwork;
 import exception.BadEntry;
 import exception.ItemBookAlreadyExists;
