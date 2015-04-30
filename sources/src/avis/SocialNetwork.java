@@ -264,6 +264,21 @@ public class SocialNetwork {
 	private Collection<Item> item;
 
 
+		
+		/**
+		 */
+		private boolean isMember(String pseudo, String password){
+			return false;	
+		}
+
+			
+			/**
+			 */
+			private boolean isItem(String titre){
+				return false;	
+			}
+
+
 
 
 

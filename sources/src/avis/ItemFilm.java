@@ -2,7 +2,6 @@ package avis;
 
 import java.util.Collection;
 
-
 public class ItemFilm extends Item {
 	private String realisateur;
 	private String scenariste;
