@@ -85,7 +85,7 @@ public class SocialNetwork {
 	 * @return le nombre de films
 	 */
 	public int nbFilms() {
-		return 0;
+		return nbFilms;
 	}
 
 	/**
