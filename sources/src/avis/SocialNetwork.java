@@ -49,8 +49,19 @@ public class SocialNetwork {
 	private static int nbMembers = 0;
 	private static int nbBooks = 0;
 	private static int nbFilms = 0;
-
-
+	
+	/** 
+	 * @uml.property name="members"
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Member"
+	 */
+	private LinkedList<Member> members;
+	
+	/** 
+	 * @uml.property name="items"
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Item"
+	 */
+	private LinkedList<Item> items;
+	
 	/**
 	 * constructeur de <i>SocialNetwok</i> 
 	 * 
@@ -252,31 +263,30 @@ public class SocialNetwork {
 	}
 
 
-	/** 
-	 * @uml.property name="member"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Member"
-	 */
-	private Collection<Member> member;
-	/**
-	 * @uml.property  name="item"
-	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="socialNetwork:avis.Item"
-	 */
-	private Collection<Item> item;
+	
 
 
 		
-		/**
-		 */
-		private boolean isMember(String pseudo, String password){
-			return false;	
-		}
+	/**
+	 */
+	private boolean isMember(String pseudo, String password){
+		return false;	
+	}
 
 			
-			/**
-			 */
-			private boolean isItem(String titre){
-				return false;	
-			}
+	/**
+	 */
+	private boolean isItem(String titre){
+		return false;	
+	}
+
+
+
+
+
+
+
+	
 
 
 
