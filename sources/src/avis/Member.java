@@ -9,7 +9,7 @@ public class Member {
 	private String password;
 	private String profil;
 	/** 
-	 * @uml.property name="review"
+	 * @uml.property name="reviews"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="member:avis.Review"
 	 */
 	private Collection<Review> review;
