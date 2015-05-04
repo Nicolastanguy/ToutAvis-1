@@ -2,6 +2,7 @@ package avis;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.lang.String;
 
 
 import exception.BadEntry;
@@ -46,9 +47,9 @@ import java.util.Collection;
 
 public class SocialNetwork {
 	
-	private static int nbMembers = 0;
-	private static int nbBooks = 0;
-	private static int nbFilms = 0;
+	private int nbMembers;
+	private int nbBooks;
+	private int nbFilms;
 	
 	/** 
 	 * @uml.property name="members"
@@ -116,7 +117,23 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
-
+		
+		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
+		//Test de Bad Entry :
+		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
+		//Le pseudo gardé en mémoire sera sans leadings et trailing blanks et sans blanks (methode trim de String)
+		String pseudoWithoutBlank = pseudo.trim();
+		if(pseudoWithoutBlank.length()<1) throw new BadEntry("Le pseudo doit contenir au moins caractère autre que des espaces");
+		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
+		
+		// - profil : doit être différent de null
+		
+		
+		//Tester si le membre est déjà présent dans la liste des membres :
+		
+		
+		members.add(newMember); //Ajour de ce membre à la linkedList des membres
 	}
 
 

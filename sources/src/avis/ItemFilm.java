@@ -1,6 +1,7 @@
 package avis;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class ItemFilm extends Item {
 	private String realisateur;
@@ -8,8 +9,8 @@ public class ItemFilm extends Item {
 	private int duree;
 	/** 
 	 * @uml.property name="review"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="itemFilm:avis.Review"
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="itemFilm:avis.Review"
 	 */
-	private Collection<Review> review;
+	private LinkedList<Review> review;
 
 }
