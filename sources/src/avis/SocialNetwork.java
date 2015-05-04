@@ -2,6 +2,7 @@ package avis;
 
 import String;
 import java.util.LinkedList;
+import java.lang.String;
 
 import exception.BadEntry;
 import exception.ItemFilmAlreadyExists;
@@ -118,6 +119,25 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
+<<<<<<< HEAD
+=======
+		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
+		//Test de Bad Entry :
+		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
+		//Le pseudo gardé en mémoire sera sans leadings et trailing blanks et sans blanks (methode trim de String)
+		String pseudoWithoutBlank = pseudo.trim();
+		if(pseudoWithoutBlank.length()<1) throw new BadEntry("Le pseudo doit contenir au moins caractère autre que des espaces");
+		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
+		
+		// - profil : doit être différent de null
+		
+		
+		//Tester si le membre est déjà présent dans la liste des membres :
+		
+		
+		members.add(newMember); //Ajour de ce membre à la linkedList des membres
+>>>>>>> 06973c892b0ed8968a7e989f15cfb85de4cfde01
 	}
 
 
