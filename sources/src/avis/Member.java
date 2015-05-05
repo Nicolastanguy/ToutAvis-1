@@ -1,10 +1,16 @@
 package avis;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 
 public class Member {
 	
+	/**
+	 * @uml.property  name="reviews"
+	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="member:avis.Review"
+	 */
+	private LinkedList<Review> reviews;
 	private String pseudo;
 	private String password;
 	private String profil;
@@ -14,10 +20,5 @@ public class Member {
 		this.password = password;
 		this.profil = profil;
 	}
-	/** 
-	 * @uml.property name="review"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="member:avis.Review"
-	 */
-	private Collection<Review> review;
-
+	
 }

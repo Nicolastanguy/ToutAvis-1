@@ -1,53 +1,23 @@
 package avis;
 
-import String;
-
+import java.util.LinkedList;
 
 public abstract class Item {
-	private String titre;
-	private String genre;
-		
-			
-			
-				
-				
-					
-					/**
-					 */
-					public boolean memberAlreadyReview(Member member){
-					
-										return false;	
-									 }
-
-
-
-
-
-
-						
-							
-							
-								
-								
-								public float addReviewToItem(String commentaire, float note){
-									return 0;
-								}
-
-
-
-
-
-
-
-
-
-								
-								/**
-								 */
-								public float averageRating(){
-									return 0;
-								}
-			
 	
-
+	/**
+	 * @uml.property  name="reviews"
+	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="item:avis.Review"
+	 */
+	protected LinkedList<Review> reviews;
+	protected String titre;
+	protected String genre;
+	
+	public float addReviewToItem(String commentaire, float note){
+		return 0;
+	}
+	
+	public float averageRating(){
+		return 0;
+	}
+	
 }
