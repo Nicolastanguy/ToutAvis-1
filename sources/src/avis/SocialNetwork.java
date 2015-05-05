@@ -1,8 +1,9 @@
 package avis;
 
-import String;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.lang.String;
+
 
 import exception.BadEntry;
 import exception.ItemFilmAlreadyExists;
@@ -10,6 +11,7 @@ import exception.ItemBookAlreadyExists;
 import exception.MemberAlreadyExists;
 import exception.NotItem;
 import exception.NotMember;
+import java.util.Collection;
 
 /** 
  * @author A. Beugnard, 
@@ -67,9 +69,6 @@ public class SocialNetwork {
 	 */
 
 	public SocialNetwork() {
-		nbMembers = 0;
-		nbBooks = 0;
-		nbFilms = 0;
 	}
 
 	/**
@@ -96,7 +95,7 @@ public class SocialNetwork {
 	 * @return le nombre de livres
 	 */
 	public int nbBooks() {
-		return nbBooks;
+		return 0;
 	}
 
 
@@ -119,8 +118,6 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
-<<<<<<< HEAD
-=======
 		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
 		//Test de Bad Entry :
 		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
@@ -137,7 +134,6 @@ public class SocialNetwork {
 		
 		
 		members.add(newMember); //Ajour de ce membre à la linkedList des membres
->>>>>>> 06973c892b0ed8968a7e989f15cfb85de4cfde01
 	}
 
 
@@ -167,8 +163,7 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
-		ItemFilm newFilm = new ItemFilm(titre, genre, realisateur, scenariste, duree);
-		items.add(newFilm);
+
 	}
 
 	/**
@@ -196,8 +191,7 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
-		ItemBook newBook = new ItemBook(titre, genre, auteur, nbPages);
-		items.add(newBook);
+
 	}
 
 	/**
@@ -285,18 +279,22 @@ public class SocialNetwork {
 		return "";
 	}
 
-	private boolean isMember(String pseudo){
-		if(members.contains())
-			return true;
-		if(!members.contains())
-			return false;
+
+	
+
+
+		
+	/**
+	 */
+	private boolean isMember(String pseudo, String password){
+		return false;	
 	}
 
+			
+	/**
+	 */
 	private boolean isItem(String titre){
-		if(items.contains())
-			return true;
-		if(!items.contains())
-			return false;
+		return false;	
 	}
 
 

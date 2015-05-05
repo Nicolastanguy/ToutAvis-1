@@ -15,7 +15,7 @@ public class Member {
 		this.profil = profil;
 	}
 	/** 
-	 * @uml.property name="reviews"
+	 * @uml.property name="review"
 	 * @uml.associationEnd multiplicity="(0 -1)" inverse="member:avis.Review"
 	 */
 	private Collection<Review> review;
