@@ -53,13 +53,13 @@ public class SocialNetwork {
 	 * @uml.property name="members"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Member"
 	 */
-	private LinkedList<Member> members;
+	private LinkedList<Member> members = new LinkedList<Member>();
 	
 	/** 
 	 * @uml.property name="items"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Item"
 	 */
-	private LinkedList<Item> items;
+	private LinkedList<Item> items = new LinkedList<Item>();
 	
 	/**
 	 * constructeur de <i>SocialNetwok</i> 
@@ -133,7 +133,9 @@ public class SocialNetwork {
 		if (profil==null) throw new BadEntry("Le profil de du membre n'est pas instancié");		
 		
 		//Test de MemberAlreadyExists :
-		if (isMember(pseudo)) throw new MemberAlreadyExists("Le pseudo est déjà utilisé");
+		if (members.size()!=0){	
+			if (isMember(pseudo)) throw new MemberAlreadyExists("Le pseudo est déjà utilisé");
+		}
 				
 		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
 		members.add(newMember); //Ajour de ce membre à la linkedList des membres
