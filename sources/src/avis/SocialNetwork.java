@@ -119,21 +119,23 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
-		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
 		//Test de Bad Entry :
 		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
-		//Le pseudo gardé en mémoire sera sans leadings et trailing blanks et sans blanks (methode trim de String)
-		String pseudoWithoutBlank = pseudo.trim();
-		if(pseudoWithoutBlank.length()<1) throw new BadEntry("Le pseudo doit contenir au moins caractère autre que des espaces");
+		//Le pseudo gardé en mémoire sera sans leadings et trailing blanks et sans blanks (utilisation methode trim de String)
+		pseudo = pseudo.trim(); //On retire les blanks du pseudo
+		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
-		
+		if (password==null) throw new BadEntry("Le password n'est instancié");
+		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
 		// - profil : doit être différent de null
+		if (profil==null) throw new BadEntry("Le profil de du membre n'est pas instancié");		
 		
-		
-		//Tester si le membre est déjà présent dans la liste des membres :
-		
-		
+		//Test de MemberAlreadyExists :
+		if (isMember(pseudo)) throw new MemberAlreadyExists("Le pseudo est déjà utilisé");
+				
+		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
 		members.add(newMember); //Ajour de ce membre à la linkedList des membres
 	}
 
@@ -283,16 +285,16 @@ public class SocialNetwork {
 	}
 
 	private boolean isMember(String pseudo){
-		if(members.contains())
+		if(members.contains(pseudo))
 			return true;
-		if(!members.contains())
+		else
 			return false;
 	}
 
 	private boolean isItem(String titre){
-		if(items.contains())
+		if(items.contains(titre))
 			return true;
-		if(!items.contains())
+		else
 			return false;
 	}
 
