@@ -21,4 +21,10 @@ public class Member {
 		this.profil = profil;
 	}
 	
+	//Accesseur du pseudo 
+	public String getPseudo(){
+		return pseudo;
+	}
+	
+		
 }

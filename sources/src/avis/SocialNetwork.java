@@ -119,26 +119,26 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
-		//Test de Bad Entry :
+		//__BadEntry__\\
 		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
-		//Le pseudo gardé en mémoire sera sans leadings et trailing blanks et sans blanks (utilisation methode trim de String)
 		pseudo = pseudo.trim(); //On retire les blanks du pseudo
-		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins caractère autre que des espaces");
+		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
 		if (password==null) throw new BadEntry("Le password n'est instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
 		// - profil : doit être différent de null
-		if (profil==null) throw new BadEntry("Le profil de du membre n'est pas instancié");		
+		if (profil==null) throw new BadEntry("Le profil du membre n'est pas instancié");		
 		
-		//Test de MemberAlreadyExists :
+		//__MemberAlreadyExists__\\
 		if (members.size()!=0){	
 			if (isMember(pseudo)) throw new MemberAlreadyExists("Le pseudo est déjà utilisé");
 		}
 				
 		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
 		members.add(newMember); //Ajour de ce membre à la linkedList des membres
+		nbMembers++;
 	}
 
 
@@ -168,8 +168,37 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
-		ItemFilm newFilm = new ItemFilm(titre, genre, realisateur, scenariste, duree);
+		
+		//___Bad Entry___\\
+		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
+		pseudo = pseudo.trim(); //On retire les blanks du pseudo
+		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
+		if (password==null) throw new BadEntry("Le password n'est instancié");
+		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
+		if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");
+		// - genre : doit être différent de null
+		if (genre==null) throw new BadEntry ("Le genre du film n'est pas instancié");
+		// - réalisateur : doit être différent de null
+		if (realisateur==null) throw new BadEntry ("Le realisateur du film n'est pas instancié");
+		// - scenariste : doit être différent de null
+		if (scenariste==null) throw new BadEntry ("Le scenariste du film n'est pas instancié");
+		// - durée : doit être positive
+		if (duree<=0) throw new BadEntry ("La duree du film doit être positive");		
+		
+		//__NotMember__\\
+		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+		
+		//__ItemFilmAlreadyExists__\\
+		
+		
+		//__Ajout du film__\\
+		Item newFilm = new ItemFilm(titre, genre, realisateur, scenariste, duree);
 		items.add(newFilm);
+		nbFilms++;
 	}
 
 	/**
@@ -286,14 +315,27 @@ public class SocialNetwork {
 		return "";
 	}
 
+	/**
+	 * Permet de savoir si le pseudo est déjà utilisé dans la liste des membres enregistrés
+	 * @param pseudo
+	 * @return True si le pseudo est déjà présent dans la liste des membres / False sinon
+	 */
 	private boolean isMember(String pseudo){
-		if(members.contains(pseudo))
-			return true;
-		else
-			return false;
+		//Comparaison des pseudos de la liste de membres avec le pseudo passé en paramètre
+		for (Member membre : members){
+			if (membre.getPseudo()==pseudo) return true;
+		}
+		return false;
 	}
-
+	
+	/**
+	 * Permet de savoir si l'item est déjà présent dans la liste des items du réseau social
+	 * @param titre
+	 * @return True si l'item est déjà enregistré sur le réseau social / False sinon
+	 */
 	private boolean isItem(String titre){
+		//Comparaison des titres (film ou livre) pour voir si l'item est déjà présent dans la liste
+		for (ItemFilm itemfilm : items)
 		if(items.contains(titre))
 			return true;
 		else

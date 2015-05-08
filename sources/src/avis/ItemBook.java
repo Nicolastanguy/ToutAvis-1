@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 public class ItemBook extends Item {
 	
-	private String auteur;
-	private int nbPages;
+	protected String auteur;
+	protected int nbPages;
 	
 	public ItemBook(String titre, String genre, String auteur, int nbPages){
 		this.titre = titre;
