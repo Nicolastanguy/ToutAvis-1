@@ -13,8 +13,9 @@ public abstract class Item {
 	protected String genre;
 	protected float averageRating;
 	
-	public float addReviewToItem(String commentaire, float note){
-		return 0;
+	public void addReviewToItem(float note, String commentaire){
+		Review newReview = new Review(note, commentaire);
+		reviews.add(newReview);
 	}
 	
 	/**

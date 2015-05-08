@@ -34,7 +34,7 @@
           <children xsi:type="editmodel:MessageLabelEditModel" size="0,14"/>
         </children>
       </sourceConnections>
-      <sourceConnections xsi:type="editmodel:SelfSequenceMessageEditModel" name="isItem" id="avis/SocialNetwork#isItemFilm(Ljava.lang.String;)" source="//@children.1/@children.0" target="//@children.1/@children.2" targetEnd="//@children.1/@children.0/@sourceConnections.1/@children.1" sourceEnd="//@children.1/@children.0/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan" associatedMethod="isItem(String): boolean" associatedSequenceNumber="1.2">
+      <sourceConnections xsi:type="editmodel:SelfSequenceMessageEditModel" name="isItem" id="avis/SocialNetwork#ItemFilm(Ljava.lang.String;)" source="//@children.1/@children.0" target="//@children.1/@children.2" targetEnd="//@children.1/@children.0/@sourceConnections.1/@children.1" sourceEnd="//@children.1/@children.0/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan" associatedMethod="isItem(String): boolean" associatedSequenceNumber="1.2">
         <children xsi:type="editmodel:SequenceEndEditModel" location="14,67" anchorKind="FixedAtEdge" attachSource="true" userLabel="//@children.1/@children.0/@sourceConnections.1/@children.0/@children.0" methodLabel="//@children.1/@children.0/@sourceConnections.1/@children.0/@children.1" sequenceNumberLabel="//@children.1/@children.0/@sourceConnections.1/@children.0/@children.2" statementExpression="//@children.1/@children.0/@sourceConnections.1/@children.0/@children.3">
           <children xsi:type="editmodel:MessageLabelEditModel" size="60,14" labelValue="Item existe ?"/>
           <children xsi:type="editmodel:LabelEditModel" name="isItem(String): boolean" size="107,14"/>

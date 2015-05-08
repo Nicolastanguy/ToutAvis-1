@@ -26,5 +26,4 @@ public class Member {
 		return pseudo;
 	}
 	
-		
 }
