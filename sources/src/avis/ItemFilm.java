@@ -16,5 +16,9 @@ public class ItemFilm extends Item {
 		this.duree = duree;
 		reviews = new LinkedList<Review>();
 	}
-	
+
+	//Accesseur du titre 
+	public String getTitre(){
+		return titre;
+	}
 }

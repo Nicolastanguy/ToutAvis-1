@@ -15,4 +15,8 @@ public class ItemBook extends Item {
 		reviews = new LinkedList<Review>();
 	}
 	
+	//Accesseur du titre 
+	public String getTitre(){
+		return titre;
+	}
 }

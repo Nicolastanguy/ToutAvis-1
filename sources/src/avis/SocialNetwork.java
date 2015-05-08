@@ -193,7 +193,7 @@ public class SocialNetwork {
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
 		
 		//__ItemFilmAlreadyExists__\\
-		
+		if (isItemFilm(titre)) throw new ItemFilmAlreadyExists ("Un film avec un titre identique existe déjà");
 		
 		//__Ajout du film__\\
 		Item newFilm = new ItemFilm(titre, genre, realisateur, scenariste, duree);
@@ -226,8 +226,35 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
+
+		//___Bad Entry___\\
+		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
+		pseudo = pseudo.trim(); //On retire les blanks du pseudo
+		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
+		if (password==null) throw new BadEntry("Le password n'est instancié");
+		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
+		if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");
+		// - genre : doit être différent de null
+		if (genre==null) throw new BadEntry ("Le genre du livre n'est pas instancié");
+		// - auteur : doit être différent de null
+		if (auteur==null) throw new BadEntry ("Le realisateur du livre n'est pas instancié");
+		// - nbPages : doit être positif
+		if (duree<=0) throw new BadEntry ("La duree du livre doit être positive");		
+		
+		//__NotMember__\\
+		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+		
+		//__ItemFilmAlreadyExists__\\
+		if (isItemBook(titre)) throw new ItemBookAlreadyExists ("Un livre avec un titre identique existe déjà");
+		
+		//__Ajout du livre__\\
 		ItemBook newBook = new ItemBook(titre, genre, auteur, nbPages);
 		items.add(newBook);
+		nbBooks++;
 	}
 
 	/**
@@ -329,24 +356,28 @@ public class SocialNetwork {
 	}
 	
 	/**
-	 * Permet de savoir si l'item est déjà présent dans la liste des items du réseau social
+	 * Permet de savoir si l'item film est déjà présent dans la liste des items films du réseau social
 	 * @param titre
 	 * @return True si l'item est déjà enregistré sur le réseau social / False sinon
 	 */
-	private boolean isItem(String titre){
-		//Comparaison des titres (film ou livre) pour voir si l'item est déjà présent dans la liste
-		for (ItemFilm itemfilm : items)
-		if(items.contains(titre))
-			return true;
-		else
-			return false;
+	private boolean isItemFilm(String titre){
+		//Comparaison des titres de film pour voir si l'item est déjà présent dans la liste
+		for (ItemFilm itemfilm : items){
+			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && item instanceof ItemFilm) return true;
+		}
+		return false;
 	}
-
-
 	
-
-
-
-
-
+	/**
+	 * Permet de savoir si l'item book est déjà présent dans la liste des items books du réseau social
+	 * @param titre
+	 * @return True si l'item est déjà enregistré sur le réseau social / False sinon
+	 */
+	private boolean isItemBook(String titre){
+		//Comparaison des titres de book pour voir si l'item est déjà présent dans la liste
+		for (ItemBook itembook : items){
+			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && item instanceof ItemBook) return true;
+		}
+		return false;
+	}
 }
