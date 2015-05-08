@@ -11,13 +11,25 @@ public abstract class Item {
 	protected LinkedList<Review> reviews;
 	protected String titre;
 	protected String genre;
+	protected float averageRating;
 	
 	public float addReviewToItem(String commentaire, float note){
 		return 0;
 	}
 	
-	public float averageRating(){
-		return 0;
+	/**
+	 * Met a jour la note de l'item (calcul de la moyenne des différents commentaires)
+	 * @return
+	 */
+	
+	public void averageRating(){
+		
+		float rateSum = 0; 
+		int nombreNotes = reviews.size();
+		for (Review review : reviews){
+			rateSum += review.getNote(); //somme des notes données à un item
+		}
+		averageRating = rateSum/nombreNotes; //Calcul de la moyenne
 	}
 	
 }

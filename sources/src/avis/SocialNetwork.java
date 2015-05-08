@@ -269,6 +269,10 @@ public class SocialNetwork {
 	 * (une liste vide si aucun item ne correspond) 
 	 */
 	public LinkedList <String> consultItems(String nom) throws BadEntry {
+		LinkedList<String> itemsFindList = new LinkedList<String>();
+		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
+			if (item.titre==nom) itemsFindList.add(item.titre + "note moyenne :" + item.note);
+		}		
 		return new LinkedList <String> ();
 	}
 

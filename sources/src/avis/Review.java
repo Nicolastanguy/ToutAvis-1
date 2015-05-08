@@ -10,4 +10,8 @@ public class Review {
 		this.commentaire = commentaire;
 	}
 	
+	public float getNote(){
+		return note;
+	}
+	
 }
