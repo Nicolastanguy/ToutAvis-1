@@ -363,7 +363,7 @@ public class SocialNetwork {
 	private boolean isItemFilm(String titre){
 		//Comparaison des titres de film pour voir si l'item est déjà présent dans la liste
 		for (ItemFilm itemfilm : items){
-			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && item instanceof ItemFilm) return true;
+			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm) return true;
 		}
 		return false;
 	}
@@ -376,7 +376,7 @@ public class SocialNetwork {
 	private boolean isItemBook(String titre){
 		//Comparaison des titres de book pour voir si l'item est déjà présent dans la liste
 		for (ItemBook itembook : items){
-			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && item instanceof ItemBook) return true;
+			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook) return true;
 		}
 		return false;
 	}
