@@ -32,4 +32,8 @@ public abstract class Item {
 		averageRating = rateSum/nombreNotes; //Calcul de la moyenne
 	}
 	
+	//Accesseur du titre 
+	public String getTitre(){
+		return titre;
+	}
 }

@@ -243,7 +243,7 @@ public class SocialNetwork {
 		// - auteur : doit être différent de null
 		if (auteur==null) throw new BadEntry ("Le realisateur du livre n'est pas instancié");
 		// - nbPages : doit être positif
-		if (duree<=0) throw new BadEntry ("La duree du livre doit être positive");		
+		if (nbPages<=0) throw new BadEntry ("Le nombre de page du livre doit être positif");		
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
@@ -271,8 +271,8 @@ public class SocialNetwork {
 	public LinkedList <String> consultItems(String nom) throws BadEntry {
 		LinkedList<String> itemsFindList = new LinkedList<String>();
 		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
-			if (item.titre==nom) itemsFindList.add(item.titre + "note moyenne :" + item.note);
-		}		
+			if (item.titre==nom) itemsFindList.add(item.titre + "note moyenne :" + item.averageRating);
+			}
 		return new LinkedList <String> ();
 	}
 
@@ -354,7 +354,7 @@ public class SocialNetwork {
 	private boolean isMember(String pseudo){
 		//Comparaison des pseudos de la liste de membres avec le pseudo passé en paramètre
 		for (Member membre : members){
-			if (membre.getPseudo()==pseudo) return true;
+			if (membre.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) return true;
 		}
 		return false;
 	}
@@ -366,7 +366,7 @@ public class SocialNetwork {
 	 */
 	private boolean isItemFilm(String titre){
 		//Comparaison des titres de film pour voir si l'item est déjà présent dans la liste
-		for (ItemFilm itemfilm : items){
+		for (Item itemfilm : items){
 			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm) return true;
 		}
 		return false;
@@ -379,7 +379,7 @@ public class SocialNetwork {
 	 */
 	private boolean isItemBook(String titre){
 		//Comparaison des titres de book pour voir si l'item est déjà présent dans la liste
-		for (ItemBook itembook : items){
+		for (Item itembook : items){
 			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook) return true;
 		}
 		return false;
