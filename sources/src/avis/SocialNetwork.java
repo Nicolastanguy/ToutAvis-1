@@ -121,9 +121,9 @@ public class SocialNetwork {
 		
 		//__BadEntry__\\
 		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
-		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
 		pseudo = pseudo.trim(); //On retire les blanks du pseudo
-		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
 		if (password==null) throw new BadEntry("Le password n'est instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
@@ -171,9 +171,9 @@ public class SocialNetwork {
 		
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
-		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
 		pseudo = pseudo.trim(); //On retire les blanks du pseudo
-		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
 		if (password==null) throw new BadEntry("Le password n'est instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
@@ -229,9 +229,9 @@ public class SocialNetwork {
 
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins un caractère autre que des espaces
-		if (pseudo==null) throw new BadEntry("Le pseudo n'est instancié");
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
 		pseudo = pseudo.trim(); //On retire les blanks du pseudo
-		if(pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks.
 		if (password==null) throw new BadEntry("Le password n'est instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
@@ -241,7 +241,7 @@ public class SocialNetwork {
 		// - genre : doit être différent de null
 		if (genre==null) throw new BadEntry ("Le genre du livre n'est pas instancié");
 		// - auteur : doit être différent de null
-		if (auteur==null) throw new BadEntry ("Le realisateur du livre n'est pas instancié");
+		if (auteur==null) throw new BadEntry ("L'auteur du livre n'est pas instancié");
 		// - nbPages : doit être positif
 		if (nbPages<=0) throw new BadEntry ("Le nombre de page du livre doit être positif");		
 		
@@ -269,15 +269,21 @@ public class SocialNetwork {
 	 * (une liste vide si aucun item ne correspond) 
 	 */
 	public LinkedList <String> consultItems(String nom) throws BadEntry {
+		
+		//___Bad Entry___\\
+		// - nom : doit être différent de null ou avec au moins un caractère autre que des espaces
+		if (nom==null) throw new BadEntry("Le nom n'est pas instancié");
+		nom = nom.trim(); //On retire les blanks du nom
+		if(nom.length()<1) throw new BadEntry("Le nom doit contenir au moins un caractère autre que des espaces");
+		
 		LinkedList<String> itemsFindList = new LinkedList<String>();
+		
 		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
-			if (item.titre==nom) itemsFindList.add(item.titre + "note moyenne :" + item.averageRating);
-			}
-		return new LinkedList <String> ();
+			if (item.getTitre().trim().toLowerCase().equals(nom.trim().toLowerCase())) itemsFindList.add(item.titre + " - note moyenne : " + item.averageRating);
+		}
+		return itemsFindList;
 	}
-
-
-
+	
 	/**
 	 * Donner son opinion sur un item film.
 	 * Ajoute l'opinion de ce membre sur ce film au <i>SocialNetwork</i> 
