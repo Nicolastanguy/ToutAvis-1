@@ -3,7 +3,10 @@ package avis;
 import java.util.Collection;
 import java.util.LinkedList;
 
-
+/**
+ * Membre du réseau social
+ *
+ */
 public class Member {
 	
 	/**
@@ -24,6 +27,11 @@ public class Member {
 	//Accesseur du pseudo 
 	public String getPseudo(){
 		return pseudo;
+	}
+	
+	public String toString(){
+		//Ne renvoie que le pseudo du membre
+		return ("\n"+pseudo);
 	}
 	
 }

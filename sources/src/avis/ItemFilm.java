@@ -16,9 +16,9 @@ public class ItemFilm extends Item {
 		this.duree = duree;
 		reviews = new LinkedList<Review>();
 	}
-
-	//Accesseur du titre 
-	public String getTitre(){
-		return titre;
+	
+	public String toString(){
+		return ("\n Titre : "+titre+" genre : "+genre+" realisateur : "+realisateur+" Scenariste : "+scenariste+
+				" duree : "+duree+" nombre de commentaires : "+reviews.size());
 	}
 }

@@ -55,17 +55,18 @@ public class SocialNetwork {
 	 */
 	private LinkedList<Member> members = new LinkedList<Member>();
 	
-	/** 
-	 * @uml.property name="items"
-	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Item"
+	/**
+	 * @uml.property  name="items"
+	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Item"
 	 */
 	private LinkedList<Item> items = new LinkedList<Item>();
 	
+	
+	
+	
 	/**
 	 * constructeur de <i>SocialNetwok</i> 
-	 * 
 	 */
-
 	public SocialNetwork() {
 		nbMembers = 0;
 		nbBooks = 0;
@@ -119,11 +120,12 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
 		//__BadEntry__\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		//On retire les blanks du pseudo avec trim()
-		if (pseudo.trim().length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
@@ -169,11 +171,13 @@ public class SocialNetwork {
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 		
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
+		titre = titre.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		//On retire les blanks du pseudo avec trim()
-		if (pseudo.trim().length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
@@ -229,11 +233,13 @@ public class SocialNetwork {
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
+		titre = titre.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		//On retire les blanks du pseudo avec trim()
-		if (pseudo.trim().length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
@@ -274,16 +280,17 @@ public class SocialNetwork {
 	 */
 	public LinkedList <String> consultItems(String nom) throws BadEntry {
 		
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		nom = nom.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - nom : doit être différent de null ou avec au moins un caractère autre que des espaces
 		if (nom==null) throw new BadEntry("Le nom n'est pas instancié");
 		//On retire les blanks du nom avec trim()
 		if(nom.trim().length()<1) throw new BadEntry("Le nom doit contenir au moins un caractère autre que des espaces");
 		
-		LinkedList<String> itemsFindList = new LinkedList<String>();
-		
+		LinkedList<String> itemsFindList = new LinkedList<String>();		
 		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
-			if (item.getTitre().trim().toLowerCase().equals(nom.trim().toLowerCase())) itemsFindList.add(item.titre + " - note moyenne : " + item.averageRating);
+			if (item.getTitre().trim().toLowerCase().equals(nom.trim().toLowerCase())) itemsFindList.add(item.titre + " - note moyenne : " + item.averageRating + item.reviews.toString());
 		}
 		return itemsFindList;
 	}
@@ -314,6 +321,9 @@ public class SocialNetwork {
 	 */
 	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
+		titre = titre.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
@@ -380,7 +390,24 @@ public class SocialNetwork {
 	 * @return la chaîne de caractères représentation textuelle du <i>SocialNetwork</i> 
 	 */
 	public String toString() {
-		return "";
+		//Liste des films : 
+		LinkedList <Item> filmList = new LinkedList<Item>();
+		for (Item item : items){
+			if (item instanceof ItemFilm) filmList.add(item);
+		}
+		//Liste des livres : 
+		LinkedList <Item> bookList = new LinkedList<Item>();
+		for (Item item : items){
+			if (item instanceof ItemBook) bookList.add(item);
+		}
+				
+		return ("Nombre de membre : "+nbMembers+ "\n" 
+				+ "___Liste des membres enregistrés___  " + members.toString() + "\n"
+				+ "___Nombre de livres enregistrés : "+nbBooks+ "\n"
+				+ "___Liste des livres enregistrés___ "+bookList.toString()+ "\n"
+				+ "___Nombre de films enregistrés : "+nbFilms+ "\n"
+				+ "___Liste des films enregistrés___ "+filmList.toString() + "\n"
+				);
 	}
 
 	/**
@@ -421,4 +448,9 @@ public class SocialNetwork {
 		}
 		return false;
 	}
+
+	
+
+	
+
 }

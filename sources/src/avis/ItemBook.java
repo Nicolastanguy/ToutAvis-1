@@ -15,8 +15,8 @@ public class ItemBook extends Item {
 		reviews = new LinkedList<Review>();
 	}
 	
-	//Accesseur du titre 
-	public String getTitre(){
-		return titre;
+	public String toString(){
+		return ("\n Titre : "+titre+" genre : "+genre+" auteur : "+auteur+
+				" nombre de pages : "+nbPages+" nombre de commentaires : "+reviews.size());
 	}
 }

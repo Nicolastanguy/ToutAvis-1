@@ -14,4 +14,8 @@ public class Review {
 		return note;
 	}
 	
+	public String toString(){
+		return (" note : "+note+ " commentaire : <<"+commentaire+">>");
+	}
+	
 }
