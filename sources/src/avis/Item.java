@@ -28,13 +28,29 @@ public abstract class Item {
 	}
 	
 	/**
+	 * 
+	 * 
+	 */	
+	public void addReviewToItem(float note, String commentaire){
+		Review newReview = new Review(note, commentaire);
+		reviews.add(newReview);
+	}
+	
+	/**
 	 * Accesseur du titre de l'item
 	 * @return
 	 */
 	public String getTitre(){
 		return titre;
 	}
-
+	
+	/**
+	 * Accesseur de la note moyenne
+	 * @return
+	 */
+	public float getAverageRating(){
+		return averageRating;
+	}
 		
 	/**
 	 */

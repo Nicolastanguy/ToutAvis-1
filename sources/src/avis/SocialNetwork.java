@@ -349,8 +349,16 @@ public class SocialNetwork {
 		if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
 		
 		//__Ajout du review__\\
-		//addReviewToItem(note, commentaire);
-		return 0.0f;
+		//Comparaison des titres de film pour trouver le film à évaluer
+		float tempAverageRating = 0.0f;
+		for (Item itemfilm : items){
+			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
+				itemfilm.addReviewToItem(note, commentaire);
+				itemfilm.averageRating();
+				tempAverageRating = itemfilm.getAverageRating();
+			}
+		}
+		return tempAverageRating;
 	}
 
 

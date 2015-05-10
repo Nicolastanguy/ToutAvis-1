@@ -15,10 +15,11 @@ public class ItemFilm extends Item {
 		this.scenariste = scenariste;
 		this.duree = duree;
 		reviews = new LinkedList<Review>();
+		averageRating = 0.0f;
 	}
 	
 	public String toString(){
 		return ("\n Titre : "+titre+" genre : "+genre+" realisateur : "+realisateur+" Scenariste : "+scenariste+
-				" duree : "+duree+" nombre de commentaires : "+reviews.size());
+				" duree : "+duree+" note moyenne : "+averageRating+" nombre de commentaires : "+reviews.size());
 	}
 }

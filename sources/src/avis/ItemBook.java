@@ -17,6 +17,6 @@ public class ItemBook extends Item {
 	
 	public String toString(){
 		return ("\n Titre : "+titre+" genre : "+genre+" auteur : "+auteur+
-				" nombre de pages : "+nbPages+" nombre de commentaires : "+reviews.size());
+				" nombre de pages : "+nbPages+" note moyenne : "+averageRating+" nombre de commentaires : "+reviews.size());
 	}
 }
