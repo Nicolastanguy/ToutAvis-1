@@ -197,7 +197,6 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
 		
 		//__ItemFilmAlreadyExists__\\
 		if (isItemFilm(titre)) throw new ItemFilmAlreadyExists ("Un film avec un titre identique existe déjà");
@@ -258,12 +257,9 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
 		
 		//__ItemFilmAlreadyExists__\\
 		if (isItemBook(titre)) throw new ItemBookAlreadyExists ("Un livre avec un titre identique existe déjà");
-		
-		//__Verification__\\
 		
 		//__Ajout du livre__\\
 		ItemBook newBook = new ItemBook(titre, genre, auteur, nbPages);
@@ -347,7 +343,6 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
 		
 		//__NotItem__\\
 		if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
@@ -415,11 +410,9 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
+		
 		//__NotItem__\\
 		if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
-		
-
 		
 		//__Ajout du review__\\
 		//Comparaison des titres de livre pour trouver le livre à évaluer
@@ -446,7 +439,7 @@ public class SocialNetwork {
 		for (Item item : items){
 			if (item instanceof ItemFilm) filmList.add(item);
 		}
-		//Liste des livres :  
+		//Liste des livres : 
 		LinkedList <Item> bookList = new LinkedList<Item>();
 		for (Item item : items){
 			if (item instanceof ItemBook) bookList.add(item);
@@ -468,8 +461,8 @@ public class SocialNetwork {
 	 */
 	private boolean isMember(String pseudo){
 		//Comparaison des pseudos de la liste de membres avec le pseudo passé en paramètre
-		for (Member member : members){
-			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) return true;
+		for (Member membre : members){
+			if (membre.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) return true;
 		}
 		return false;
 	}
@@ -498,21 +491,6 @@ public class SocialNetwork {
 			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook) return true;
 		}
 		return false;
-	}		
-	
-	/**
-	 * Permet de savoir si le mot de passe correspond bien au pseudo passé en paramètre
-	 * @param pseudo, password
-	 * @return True si le mot de passe est bien celui du membre enregistré passé en paramètre / False sinon
-	 */
-	private boolean isPswCorrespondToPseudo(String pseudo, String password){
-		//Comparaison des pseudos de la liste de membres avec le pseudo passé en paramètre
-		for (Member member : members){
-			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
-				if(member.getPassword().trim().toLowerCase().equals(password)) return true;
-			}	
-		}
-		return false;	
 	}
 
 	
