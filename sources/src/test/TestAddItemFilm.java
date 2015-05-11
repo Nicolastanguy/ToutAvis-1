@@ -174,13 +174,13 @@ public class TestAddItemFilm {
 		// tentative d'ajout de films "existant"
 		
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "Personne1", "psw1", "titre6", "genre6", "realisateur6", "scenariste6", 120, "6.4", "L'ajout d'un film avec le titre du premier livre ajouté est accepté");
+		nbErreurs += addItemFilmAlreadyExistsTest ( sn, "Personne1", "psw1", "titre1", "genre1", "realisateur1", "scenariste1", 120, "6.4", "L'ajout d'un film avec le titre du premier livre ajouté est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "Personne1", "psw1", "titre7", "genre7", "realisateur7", "scenariste7", 120, "6.5", "L'ajout d'un film avec le titre du dernier livre ajouté est accepté");
+		nbErreurs += addItemFilmAlreadyExistsTest ( sn, "Personne1", "psw1", "titre3", "genre3", "realisateur3", "scenariste3", 120, "6.5", "L'ajout d'un film avec le titre du dernier livre ajouté est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "Personne1", "psw1", "tiTre8", "genre8", "realisateur8", "scenariste8", 120, "6.6", "L'ajout d'un film avec un titre existant (avec casse différente) est accepté");
+		nbErreurs += addItemFilmAlreadyExistsTest ( sn, "Personne1", "psw1", "tiTre2", "genre2", "realisateur2", "scenariste2", 120, "6.6", "L'ajout d'un film avec un titre existant (avec casse différente) est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "Personne1", "psw1", " titre9 ", "genre9", "realisateur9", "scenariste9", 120, "6.7", "L'ajout d'un film avec un titre existant (avec leading et trailing blanks) est accepté");
+		nbErreurs += addItemFilmAlreadyExistsTest ( sn, "Personne1", "psw1", " titre2 ", "genre2", "realisateur2", "scenariste2", 120, "6.7", "L'ajout d'un film avec un titre existant (avec leading et trailing blanks) est accepté");
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbBooks()!=nbBooks){
