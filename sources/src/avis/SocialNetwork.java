@@ -321,13 +321,11 @@ public class SocialNetwork {
 	 */
 	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
-		titre = titre.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		pseudo = pseudo.trim(); //On retire les blanks du pseudo avec trim()
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
@@ -336,7 +334,8 @@ public class SocialNetwork {
 		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
 		if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");		
 		//On retire les blanks du titre avec trim()
-		if (titre.trim().length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		titre = titre.trim().toLowerCase();
+		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
 		// - note : doit être comprise entre 0.0 et 5.0
 		if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
 		// - commentaire : doit être différent de null
@@ -388,7 +387,44 @@ public class SocialNetwork {
 	 * @return la note moyenne des notes sur ce livre
 	 */
 	public float reviewItemBook(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
-		return 0.0f;
+		
+		//___Bad Entry___\\
+		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
+		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
+		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
+		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
+		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
+		if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");		
+		//On retire les blanks du titre avec trim()
+		titre = titre.trim().toLowerCase();
+		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		// - note : doit être comprise entre 0.0 et 5.0
+		if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
+		// - commentaire : doit être différent de null
+		if (commentaire==null) throw new BadEntry("Le commentaire n'est pas instancié");
+		
+		//__NotMember__\\
+		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+		
+		//__NotItem__\\
+		if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
+		
+		//__Ajout du review__\\
+		//Comparaison des titres de livre pour trouver le livre à évaluer
+		float tempAverageRating = 0.0f;
+		for (Item itembook : items){
+			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
+				itembook.addReviewToItem(note, commentaire);
+				itembook.averageRating();
+				tempAverageRating = itembook.getAverageRating();
+			}
+		}
+		return tempAverageRating;
 	}
 
 
