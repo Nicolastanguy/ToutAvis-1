@@ -120,11 +120,11 @@ public class SocialNetwork {
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
 		//__BadEntry__\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
@@ -171,12 +171,11 @@ public class SocialNetwork {
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 		
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
-		titre = titre.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
@@ -185,7 +184,8 @@ public class SocialNetwork {
 		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
 		if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");
 		//On retire les blanks du titre avec trim()
-		if (titre.trim().length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		titre = titre.trim().toLowerCase();
+		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
 		// - genre : doit être différent de null
 		if (genre==null) throw new BadEntry ("Le genre du film n'est pas instancié");
 		// - réalisateur : doit être différent de null
@@ -233,12 +233,11 @@ public class SocialNetwork {
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
-		titre = titre.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
@@ -247,7 +246,8 @@ public class SocialNetwork {
 		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
 		if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");
 		//On retire les blanks du titre avec trim()
-		if (titre.trim().length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		titre = titre.trim().toLowerCase();
+		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
 		// - genre : doit être différent de null
 		if (genre==null) throw new BadEntry ("Le genre du livre n'est pas instancié");
 		// - auteur : doit être différent de null

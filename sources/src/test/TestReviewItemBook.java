@@ -4,7 +4,6 @@ import exception.*;
 import avis.SocialNetwork;
 import test.TestCreationSN;
 
-
 public class TestReviewItemBook{
 	
 	public static int reviewItemBookBadEntryTest (SocialNetwork sn,String pseudo,

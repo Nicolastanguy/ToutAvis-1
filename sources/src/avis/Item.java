@@ -8,6 +8,10 @@ import java.util.LinkedList;
  */
 public abstract class Item {
 	
+	/**
+	 * @uml.property  name="reviews"
+	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="item:avis.Review"
+	 */
 	protected LinkedList<Review> reviews;
 	protected String titre;
 	protected String genre;
@@ -55,5 +59,5 @@ public abstract class Item {
 	/**
 	 */
 	public abstract String toString();
-		
+	
 }

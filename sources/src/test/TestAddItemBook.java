@@ -165,20 +165,20 @@ public class TestAddItemBook {
 		// tentative d'ajout de livres avec un membre "inexistant"
 		
 		nbTests++;
-		nbErreurs += addItemBookNotMemberTest ( sn, "membreInexistant", "password", "", "", "", 10, "4.2", "L'ajout d'un livre avec un membre inexistant est accepté");
+		nbErreurs += addItemBookNotMemberTest ( sn, "membreInexistant", "password", "titre4", "genre4", "auteur4", 10, "4.2", "L'ajout d'un livre avec un membre inexistant est accepté");
 		nbTests++;
-		nbErreurs += addItemBookNotMemberTest ( sn, "Personne1", "mauvaisPassword", "", "", "", 10, "4.3", "L'ajout d'un livre avec un membre existant et un mauvais password est accepté");
+		nbErreurs += addItemBookNotMemberTest ( sn, "Personne1", "mauvaisPassword", "titre4", "genre4", "auteur4", 10, "4.3", "L'ajout d'un livre avec un membre existant et un mauvais password est accepté");
 		
 		// tentative d'ajout de livres "existant"
 		
 		nbTests++;
-		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", "titre1", "", "", 10, "4.4", "L'ajout d'un livre avec le titre du premier livre ajouté est accepté");
+		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", "titre5", "genre5", "auteur5", 10, "4.4", "L'ajout d'un livre avec le titre du premier livre ajouté est accepté");
 		nbTests++;
-		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", "titre3", "", "", 10, "4.5", "L'ajout d'un livre avec le titre du dernier livre ajouté est accepté");
+		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", "titre6", "genre6", "auteur6", 10, "4.5", "L'ajout d'un livre avec le titre du dernier livre ajouté est accepté");
 		nbTests++;
-		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", "tiTre2", "", "", 10, "4.6", "L'ajout d'un livre avec un titre existant (avec casse différente) est accepté");
+		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", "tiTre7", "genre7", "auteur7", 10, "4.6", "L'ajout d'un livre avec un titre existant (avec casse différente) est accepté");
 		nbTests++;
-		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", " titre2 ", "", "", 10, "4.7", "L'ajout d'un livre avec un titre existant (avec leading et trailing blanks) est accepté");
+		nbErreurs += addItemBookBadEntryTest ( sn, "Personne1", "psw1", " titre8 ", "genre8", "auteur8", 10, "4.7", "L'ajout d'un livre avec un titre existant (avec leading et trailing blanks) est accepté");
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbBooks()!=nbBooks){
