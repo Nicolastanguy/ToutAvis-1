@@ -49,7 +49,7 @@ public class TestReviewItemBook{
 		try {
 			sn.reviewItemBook(pseudo, password, titre, note, commentaire);
 			System.out.println(idTest+"Ajout d'un avis avec des identifiants incorrects accepté");
-			return 0;
+			return 1;
 		}
 		catch (NotMember e){
 			if(sn.nbBooks()!=nbBooks){
@@ -71,7 +71,7 @@ public class TestReviewItemBook{
 		try {
 			sn.reviewItemBook(pseudo, password, titre, note, commentaire);
 			System.out.println(idTest+"Ajout d'un avis sur un livre non existant accepté");
-			return 0;
+			return 1;
 		}
 		catch (NotMember e){
 			if(sn.nbBooks()!=nbBooks){
