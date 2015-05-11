@@ -49,7 +49,7 @@ public class TestReviewItemFilm{
 		try {
 			sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
 			System.out.println(idTest+"Ajout d'un avis avec des identifiants incorrects accepté");
-			return 0;
+			return 1;
 		}
 		catch (NotMember e){
 			if(sn.nbFilms()!=nbFilms){
@@ -71,7 +71,7 @@ public class TestReviewItemFilm{
 		try {
 			sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
 			System.out.println(idTest+"Ajout d'un avis sur un film non existant accepté");
-			return 0;
+			return 1;
 		}
 		catch (NotMember e){
 			if(sn.nbFilms()!=nbFilms){

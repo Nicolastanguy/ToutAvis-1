@@ -29,6 +29,11 @@ public class Member {
 		return pseudo;
 	}
 	
+	//Accesseur du password
+	public String getPassword(){
+		return password;
+	}
+	
 	public String toString(){
 		//Ne renvoie que le pseudo du membre
 		return ("\n"+pseudo);
