@@ -102,21 +102,6 @@ public class TestAddItemFilm {
 		try {
 			sn = TestCreationSN.createNewSocialNetwork();
 		}
-		catch (BadEntry e) {
-			
-		}
-		catch (MemberAlreadyExists e) {
-			
-		}
-		catch (NotMember e) {
-			
-		}
-		catch (ItemBookAlreadyExists e) {
-			
-		}
-		catch (ItemFilmAlreadyExists e) {
-			
-		}
 		catch (Exception e) {
 			System.out.println("Erreur lors de la création du SN de test");
 		}
@@ -192,16 +177,11 @@ public class TestAddItemFilm {
 			System.out.println("Erreur  :  le nombre de membres après utilisation de addItemBook a été modifié");
 			nbErreurs++;
 		}
-		TestSocialNetwork.nbTests++;
-		if (sn.nbFilms()!=nbFilms){
-			System.out.println("Erreur  :  le nombre de films après utilisation de addItemBook a été modifié");
-			nbErreurs++;
-		}
 		
 		// bilan du test de addItemFilm
 		System.out.println("TestAddItemFilm :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués\n");
 		
 		TestSocialNetwork.nbTests += nbTests;
-		TestSocialNetwork.nbErreurs += nbErreurs;	
+		TestSocialNetwork.nbErreurs += nbErreurs;
 	}
 }

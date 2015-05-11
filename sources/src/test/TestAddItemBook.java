@@ -181,11 +181,6 @@ public class TestAddItemBook {
 		nbErreurs += addItemBookAlreadyExistsTest ( sn, "Personne1", "psw1", " titre2 ", "genre2", "auteur2", 10, "4.7", "L'ajout d'un livre avec un titre existant (avec leading et trailing blanks) est accepté");
 		
 		TestSocialNetwork.nbTests++;
-		if (sn.nbBooks()!=nbBooks){
-			System.out.println("Erreur  :  le nombre de livres après utilisation de addItemBook a été modifié");
-			nbErreurs++;
-		}
-		TestSocialNetwork.nbTests++;
 		if (sn.nbMembers()!=nbMembers){
 			System.out.println("Erreur  :  le nombre de membres après utilisation de addItemBook a été modifié");
 			nbErreurs++;
