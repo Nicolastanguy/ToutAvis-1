@@ -2,9 +2,7 @@ package test;
 
 import avis.SocialNetwork;
 import exception.BadEntry;
-import exception.ItemBookAlreadyExists;
 import exception.ItemFilmAlreadyExists;
-import exception.MemberAlreadyExists;
 import exception.NotMember;
 
 public class TestAddItemFilm {
@@ -108,7 +106,6 @@ public class TestAddItemFilm {
 		
 		int nbMembers = sn.nbMembers();
 		int nbBooks = sn.nbBooks();
-		int nbFilms = sn.nbFilms();
 
 		int nbTests = 0;
 		int nbErreurs = 0;

@@ -122,7 +122,6 @@ public class TestAddItemBook {
 		}
 		
 		int nbMembers = sn.nbMembers();
-		int nbBooks = sn.nbBooks();
 		int nbFilms = sn.nbFilms();
 
 		int nbTests = 0;

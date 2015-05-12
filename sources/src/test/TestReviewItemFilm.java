@@ -64,7 +64,7 @@ public class TestReviewItemFilm{
 		}
 	}
 	
-	public static int reviewItemFilmNotItem (SocialNetwork sn,String pseudo,
+	public static int reviewItemFilmNotItemTest (SocialNetwork sn,String pseudo,
 			String password,String titre,
 			float note,String commentaire,String idTest){
 		int nbFilms = sn.nbFilms();
@@ -73,7 +73,7 @@ public class TestReviewItemFilm{
 			System.out.println(idTest+"Ajout d'un avis sur un film non existant accepté");
 			return 1;
 		}
-		catch (NotMember e){
+		catch (NotItem e){
 			if(sn.nbFilms()!=nbFilms){
 				System.out.println(idTest+"Exception NotItem bien levée mais le nombre de film à été modifié");
 				return 1;
@@ -173,10 +173,10 @@ public class TestReviewItemFilm{
 			nbErreurs += reviewItemFilmNotMemberTest (sn,"PersonneInconnue", "psw1", "Matrix",4.5F,"blabla","TestReviewItemFilm : 10.2");
 			//10.3
 			nbTests ++;
-			nbErreurs += reviewItemFilmNotMemberTest (sn,"Personne1", "pswMauvais", "Matrix",4.5F,"blablabla","TestReviewItemFilm : 10.2");
+			nbErreurs += reviewItemFilmNotMemberTest (sn,"Personne1", "pswMauvais", "Matrix",4.5F,"blablabla","TestReviewItemFilm : 10.3");
 			//10.4
 			nbTests ++;
-			nbErreurs += reviewItemFilmNotMemberTest (sn,"Personne1", "psw1", "Matrix",4.5F,"okokok","TestReviewItemFilm : 10.2");
+			nbErreurs += reviewItemFilmNotItemTest (sn,"Personne1", "psw1", "FilmInconnu",4.5F,"okokok","TestReviewItemFilm : 10.4");
 			
 			TestSocialNetwork.nbTests++;
 			if (sn.nbBooks()!=nbLivres){

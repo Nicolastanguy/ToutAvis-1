@@ -73,7 +73,7 @@ public class TestReviewItemBook{
 			System.out.println(idTest+"Ajout d'un avis sur un livre non existant accepté");
 			return 0;
 		}
-		catch (NotMember e){
+		catch (NotItem e){
 			if(sn.nbBooks()!=nbBooks){
 				System.out.println(idTest+"Exception NotItem bien levée mais le nombre de livre à été modifié");
 				return 1;
@@ -170,10 +170,10 @@ public class TestReviewItemBook{
 		nbErreurs += reviewItemBookNotMemberTest (sn,"PersonneInconnue", "psw1", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.2");
 		//8.3
 		nbTests ++;
-		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "pswMauvais", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.2");
+		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "pswMauvais", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.3");
 		//8.4
 		nbTests ++;
-		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "psw1", "LivreInconnu",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.2");
+		nbErreurs += reviewItemBookNotItemTest (sn,"Personne1", "psw1", "LivreInconnu",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.4");
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbBooks()!=nbBooks){

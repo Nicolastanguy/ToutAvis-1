@@ -197,6 +197,7 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
 		
 		//__ItemFilmAlreadyExists__\\
 		if (isItemFilm(titre)) throw new ItemFilmAlreadyExists ("Un film avec un titre identique existe déjà");
@@ -257,6 +258,7 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
 		
 		//__ItemFilmAlreadyExists__\\
 		if (isItemBook(titre)) throw new ItemBookAlreadyExists ("Un livre avec un titre identique existe déjà");
@@ -343,7 +345,7 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
+		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
 		
 		//__NotItem__\\
 		if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
@@ -411,7 +413,7 @@ public class SocialNetwork {
 		
 		//__NotMember__\\
 		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
+		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
 		
 		//__NotItem__\\
 		if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
