@@ -3,8 +3,6 @@
 import avis.SocialNetwork;
 import exception.BadEntry;
 import exception.ItemBookAlreadyExists;
-import exception.ItemFilmAlreadyExists;
-import exception.MemberAlreadyExists;
 import exception.NotMember;
 
 public class TestAddItemBook {
@@ -101,21 +99,6 @@ public class TestAddItemBook {
 		
 		try {
 			sn = TestCreationSN.createNewSocialNetwork();
-		}
-		catch (BadEntry e) {
-			
-		}
-		catch (MemberAlreadyExists e) {
-			
-		}
-		catch (NotMember e) {
-			
-		}
-		catch (ItemBookAlreadyExists e) {
-			
-		}
-		catch (ItemFilmAlreadyExists e) {
-			
 		}
 		catch (Exception e) {
 			System.out.println("Erreur lors de la création du SN de test");

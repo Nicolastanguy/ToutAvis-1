@@ -282,13 +282,12 @@ public class SocialNetwork {
 	 */
 	public LinkedList <String> consultItems(String nom) throws BadEntry {
 		
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		nom = nom.trim().toLowerCase();
 		//___Bad Entry___\\
 		// - nom : doit être différent de null ou avec au moins un caractère autre que des espaces
 		if (nom==null) throw new BadEntry("Le nom n'est pas instancié");
-		//On retire les blanks du nom avec trim()
-		if(nom.trim().length()<1) throw new BadEntry("Le nom doit contenir au moins un caractère autre que des espaces");
+		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+		nom = nom.trim().toLowerCase();
+		if(nom.length()<1) throw new BadEntry("Le nom doit contenir au moins un caractère autre que des espaces");
 		
 		LinkedList<String> itemsFindList = new LinkedList<String>();		
 		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
