@@ -48,6 +48,7 @@ public class TestConsultItems {
 		
 		int nbMembers = sn.nbMembers();
 		int nbFilms = sn.nbFilms();
+		int nbBooks = sn.nbBooks();
 
 		int nbTests = 0;
 		int nbErreurs = 0;
@@ -76,17 +77,22 @@ public class TestConsultItems {
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbMembers()!=nbMembers){
-			System.out.println("Erreur  :  le nombre de membres après utilisation de addItemBook a été modifié");
+			System.out.println("Erreur  :  le nombre de membres après utilisation de consulItems a été modifié");
 			nbErreurs++;
 		}
 		TestSocialNetwork.nbTests++;
 		if (sn.nbFilms()!=nbFilms){
-			System.out.println("Erreur  :  le nombre de films après utilisation de addItemBook a été modifié");
+			System.out.println("Erreur  :  le nombre de films après utilisation de consulItems a été modifié");
+			nbErreurs++;
+		}
+		TestSocialNetwork.nbTests++;
+		if (sn.nbBooks()!=nbBooks){
+			System.out.println("Erreur  :  le nombre de livre après utilisation de consulItems a été modifié");
 			nbErreurs++;
 		}
 		
 		// bilan du test de addItemBook
-		System.out.println("TestAddItemBook :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués\n");
+		System.out.println("TestConsultItems :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués\n");
 		
 		TestSocialNetwork.nbTests += nbTests;
 		TestSocialNetwork.nbErreurs += nbErreurs;	
