@@ -1,5 +1,7 @@
 package avis;
 
+import java.util.LinkedList;
+
 public class Review {
 	
 	private float note;
@@ -25,5 +27,11 @@ public class Review {
 	public String getPseudo() {
 		return pseudo;
 	}
+
+	/**
+	 * @uml.property  name="reviewOpinions"
+	 * Linkedlist des membres ayant noté cet avis
+	 */
+	private LinkedList reviewOpinions;
 	
 }

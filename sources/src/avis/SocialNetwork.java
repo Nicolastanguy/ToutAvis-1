@@ -430,7 +430,53 @@ public class SocialNetwork {
 		}
 		return tempAverageRating;
 	}
-
+	
+	/**
+	 * 
+	 * @param pseudo1  pseudo du membre voulant noter un avis
+	 * @param password	password du membre voulant noter un avis
+	 * @param titre titre de l'item ou l'avis à été posté
+	 * @param type	type "film" ou "book"
+	 * @param pseudo2 pseudo du membre ayant posté l'avis
+	 * @param note note donnée à l'avis
+	 */
+	public void reviewOpinions(String pseudo1,String password,String titre,String type,String pseudo2,float note) throws BadEntry, NotMember, NotItem{
+		//___Bad Entry___\\
+			// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
+			if (pseudo1==null) throw new BadEntry("Le pseudo1 n'est pas instancié");
+			if (pseudo2==null) throw new BadEntry("Le pseudo2 n'est pas instancié");
+			//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+			pseudo1 = pseudo1.trim().toLowerCase();
+			pseudo2 = pseudo2.trim().toLowerCase();
+			if (pseudo1.length()<1) throw new BadEntry("Le pseudo1 doit contenir au moins un caractère autre que des espaces");
+			if (pseudo2.length()<1) throw new BadEntry("Le pseudo2 doit contenir au moins un caractère autre que des espaces");
+			// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
+			if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
+			if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+			if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+			if (type==null) throw new BadEntry("Le type n'est pas instancié");
+			if (((type.trim().toLowerCase())!="book")&&(type.trim().toLowerCase())!="film") throw new BadEntry("le type est différent de film ou de book");
+			// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
+			if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");		
+			//On retire les blanks du titre avec trim()
+			titre = titre.trim().toLowerCase();
+			if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+			// - note : doit être comprise entre 0.0 et 5.0
+			if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
+		
+		//__NotMember__\\
+			
+		//__NotItem__\\		
+			
+		//Est-ce que le pseudo 2 à bien commenté cet item?\\
+			
+		//Est-ce que le membre n'a pas déjà noté cet avis?\\
+			
+		//__Ajout de la note__\\
+			//Ajout du pseudo dans la linkedList reviewOpinions de l'objet review
+			//mise à jour de la note (par rapport au nombre de personne ayant déjà noté l'avis)
+			//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
+	}
 
 	/**
 	 * Obtenir une représentation textuelle du <i>SocialNetwork</i>.
