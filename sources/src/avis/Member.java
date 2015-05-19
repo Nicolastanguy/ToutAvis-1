@@ -17,6 +17,7 @@ public class Member {
 	private String pseudo;
 	private String password;
 	private String profil;
+	private float karma;
 	
 	public Member (String pseudo, String password, String profil){
 		this.pseudo = pseudo;
