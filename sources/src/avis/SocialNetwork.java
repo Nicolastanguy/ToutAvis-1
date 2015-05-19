@@ -354,7 +354,7 @@ public class SocialNetwork {
 		float tempAverageRating = 0.0f;
 		for (Item itemfilm : items){
 			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
-				itemfilm.addReviewToItem(note, commentaire, pseudo);
+				itemfilm.addReviewToItem(note, commentaire);
 				itemfilm.averageRating();
 				tempAverageRating = itemfilm.getAverageRating();
 			}
@@ -422,8 +422,7 @@ public class SocialNetwork {
 		float tempAverageRating = 0.0f;
 		for (Item itembook : items){
 			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
-				itembook.deletePreviousMemberReview(pseudo);
-				itembook.addReviewToItem(note, commentaire, pseudo);
+				itembook.addReviewToItem(note, commentaire);
 				itembook.averageRating();
 				tempAverageRating = itembook.getAverageRating();
 			}

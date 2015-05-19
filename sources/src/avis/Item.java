@@ -35,22 +35,9 @@ public abstract class Item {
 	 * 
 	 * 
 	 */	
-	public void addReviewToItem(float note, String commentaire, String pseudo){
-		Review newReview = new Review(note, commentaire, pseudo);
+	public void addReviewToItem(float note, String commentaire){
+		Review newReview = new Review(note, commentaire);
 		reviews.add(newReview);
-	}
-	
-	/**
-	 * 
-	 * 
-	 */	
-	public void deletePreviousMemberReview(String pseudo){
-		//Vérifie si le membre a déjà posté un avis sur cet item et supprimer cet avis si c'est le cas
-		Review tempReview = new Review(0, "", "");
-		for (Review review : reviews){
-			if (review.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) tempReview=review;
-		}
-		reviews.remove(tempReview);
 	}
 	
 	/**
