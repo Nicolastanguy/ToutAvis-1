@@ -42,6 +42,27 @@ public class TestReviewItemBook{
 		
 	}
 	
+	//Test la note moyenne renvoyée par reviewItemBook
+	public static int reviewItemBookAverageRatingTest (SocialNetwork sn,String pseudo,
+			String password,String titre,
+			float note,String commentaire,String idTest,float noteAttendue){
+		
+		try {
+			float noteMoyenne = 0;
+			noteMoyenne = sn.reviewItemBook(pseudo, password, titre, note, commentaire);
+			if (Math.abs(noteMoyenne-noteAttendue)<0.01) return 0;
+			else {
+				System.out.println(idTest+" Ajout d'un avis par un membre ayant déjà posté un avis : la moyenne retournée n'est pas celle attendue");
+				return 1;
+			}
+		}
+		catch (Exception e){
+			System.out.println(idTest+"Exception non prevue");
+			return 1;
+		}
+
+}
+	
 	public static int reviewItemBookNotMemberTest (SocialNetwork sn,String pseudo,
 											String password,String titre,
 											float note,String commentaire,String idTest){
@@ -136,7 +157,7 @@ public class TestReviewItemBook{
 		
 		// <=> Fiche 8 : Eprouver la méthode reviewItemBook dans le cas d’un fonctionnement standard.
 		
-		//8.1 Ajout d'avis sur des livres : les 3 membres postent un avis sur les livres qu'ils ont posté
+		//8.1 Ajout d'avis sur des livres : les 3 membres postent un avis sur les livres qu'ils ont ajoutés (3 livres / 3avis par membre)
 		//8.1a
 		nbTests ++;
 		nbErreurs += reviewItemBookOKTest(sn,"Personne1", "psw1", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.1a");
@@ -165,15 +186,28 @@ public class TestReviewItemBook{
 		nbTests ++;
 		nbErreurs += reviewItemBookOKTest(sn,"Personne3", "psw3", "La Chine",3.1F,"Xio Ping Ping","TestReviewItemBook : 8.1i");
 		
-		//8.2
+		//8.2 test avec un pseudo inconnu
 		nbTests ++;
 		nbErreurs += reviewItemBookNotMemberTest (sn,"PersonneInconnue", "psw1", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.2");
-		//8.3
+		//8.3 test avec un password mauvais et un pseudo existant
 		nbTests ++;
 		nbErreurs += reviewItemBookNotMemberTest (sn,"Personne1", "pswMauvais", "Arts martiaux",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.3");
-		//8.4
+		//8.4 le titre du livre est inconnu
 		nbTests ++;
 		nbErreurs += reviewItemBookNotItemTest (sn,"Personne1", "psw1", "LivreInconnu",4.5F,"Super livre pour etre un ninja","TestReviewItemBook : 8.4");
+		
+		
+		//8.5 On vérifie que la note est bien mise à jour si un membre ayant déjà posté un avis sur l'item reposte un avis	
+			//note de personne 1 passe de 4,5 à 0 pour le livre Arts martiaux
+		nbTests ++;
+		nbErreurs += reviewItemBookAverageRatingTest (sn,"Personne1","psw1","Arts martiaux",0,"okok","TestReviewItemBook : 8.5a",2.266F);
+			//note de personne 2 passe de 1,5 à 5 pour le livre Coupe du monde
+		nbTests ++;
+		nbErreurs += reviewItemBookAverageRatingTest (sn,"Personne2","psw2","Coupe du monde football",5,"okok","TestReviewItemBook : 8.5b",4.3F);
+			//note de personne 3 passe de 3,1 à 1 pour le livre La Chine
+		nbTests ++;
+		nbErreurs += reviewItemBookAverageRatingTest (sn,"Personne3","psw3","La Chine",1,"okok","TestReviewItemBook : 8.5c",2.1F);
+
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbBooks()!=nbBooks){

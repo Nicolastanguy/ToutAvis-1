@@ -42,6 +42,27 @@ public class TestReviewItemFilm{
 		
 	}
 	
+	//Test la note moyenne renvoyée par reviewItemFilm
+		public static int reviewItemFilmAverageRatingTest (SocialNetwork sn,String pseudo,
+				String password,String titre,
+				float note,String commentaire,String idTest,float noteAttendue){
+			
+			try {
+				float noteMoyenne = 0;
+				noteMoyenne = sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
+				if (Math.abs(noteMoyenne-noteAttendue)<0.01) return 0; //compare les notes a 0,01 prêt (car on compare des float)
+				else {
+					System.out.println(idTest+" Ajout d'un avis par un membre ayant déjà posté un avis : la moyenne retournée n'est pas celle attendue");
+					return 1;
+				}
+			}
+			catch (Exception e){
+				System.out.println(idTest+"Exception non prevue");
+				return 1;
+			}
+
+	}
+	
 	public static int reviewItemFilmNotMemberTest (SocialNetwork sn,String pseudo,
 											String password,String titre,
 											float note,String commentaire,String idTest){
@@ -177,6 +198,17 @@ public class TestReviewItemFilm{
 			//10.4
 			nbTests ++;
 			nbErreurs += reviewItemFilmNotItemTest (sn,"Personne1", "psw1", "FilmInconnu",4.5F,"okokok","TestReviewItemFilm : 10.4");
+			
+			//10.5 On vérifie que la note est bien mise à jour si un membre ayant déjà posté un avis sur l'item reposte un avis	
+				//note de personne 1 passe de 4,5 à 0 pour le film Interstellar
+			nbTests ++;
+			nbErreurs += reviewItemFilmAverageRatingTest (sn,"Personne1","psw1","Interstellar",0,"okok","TestReviewItemFilm : 10.5a",2.3F);
+				//note de personne 2 passe de 4,5 à 2 pour le film Matrix
+			nbTests ++;
+			nbErreurs += reviewItemFilmAverageRatingTest (sn,"Personne2","psw2","Matrix",2,"okok","TestReviewItemFilm : 10.5b",2.133F);
+				//note de personne 3 passe de 3,9 à 0 pour le film Titanic
+			nbTests ++;
+			nbErreurs += reviewItemFilmAverageRatingTest (sn,"Personne3","psw3","Titanic",0,"okok","TestReviewItemFilm : 10.5c",1.733F);
 			
 			TestSocialNetwork.nbTests++;
 			if (sn.nbBooks()!=nbLivres){
