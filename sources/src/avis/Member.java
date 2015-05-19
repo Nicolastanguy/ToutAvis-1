@@ -23,6 +23,7 @@ public class Member {
 		this.pseudo = pseudo;
 		this.password = password;
 		this.profil = profil;
+		karma = 5;
 	}
 	
 	//Accesseur du pseudo 
@@ -34,6 +35,10 @@ public class Member {
 	public String getPassword(){
 		return password;
 	}
+	//Accesseur du karma
+		public float getKarma(){
+			return karma;
+		}
 	
 	public String toString(){
 		//Ne renvoie que le pseudo du membre

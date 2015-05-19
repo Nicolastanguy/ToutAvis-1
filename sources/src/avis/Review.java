@@ -14,7 +14,7 @@ public class Review {
 		this.commentaire = commentaire;
 		this.pseudo = pseudo;
 	}
-	
+	//accesseur de la note d'un avis
 	public float getNote(){
 		return note;
 	}
@@ -27,11 +27,10 @@ public class Review {
 	public String getPseudo() {
 		return pseudo;
 	}
-
-	/**
-	 * @uml.property  name="reviewOpinions"
-	 * Linkedlist des membres ayant noté cet avis
-	 */
-	private LinkedList reviewOpinions;
+	//liste des membres ayant noté cet avis
+	private LinkedList<Member> reviewOpinions;
+	
+	//karma du membre lorsqu'il a posté cet avis
+	private float karma;
 	
 }
