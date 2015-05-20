@@ -23,20 +23,21 @@ public abstract class Item {
 	 */	
 	public void averageRating(){
 		
-		float rateSum = 0; 
-		int nombreNotes = reviews.size();
+		float rateSum = 0;
+		float coefSum = 0;
 		for (Review review : reviews){
-			rateSum += review.getNote(); //somme des notes données à un item
+			rateSum += review.getNote()*review.getCoef(); //somme des notes pondérées (chacunes multipliées par leur coefs) données à un item
+			coefSum += review.getCoef(); //somme des coefs
 		}
-		averageRating = rateSum/nombreNotes; //Calcul de la moyenne
+		averageRating = rateSum/coefSum; //Calcul de la moyenne
 	}
 	
 	/**
 	 * 
 	 * 
 	 */	
-	public void addReviewToItem(float note, String commentaire, String pseudo){
-		Review newReview = new Review(note, commentaire, pseudo);
+	public void addReviewToItem(float note, float coef, String commentaire, String pseudo){
+		Review newReview = new Review(note, coef, commentaire, pseudo);
 		reviews.add(newReview);
 	}
 	
@@ -46,11 +47,23 @@ public abstract class Item {
 	 */	
 	public void deletePreviousMemberReview(String pseudo){
 		//Vérifie si le membre a déjà posté un avis sur cet item et supprimer cet avis si c'est le cas
-		Review tempReview = new Review(0, "", "");
+		Review tempReview = new Review(0, 0, "", "");
 		for (Review review : reviews){
 			if (review.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) tempReview=review;
 		}
 		reviews.remove(tempReview);
+	}
+	
+	/**
+	 * 
+	 * 
+	 */	
+	public void addNoteToReview(String pseudo1, String pseudo2, float note){
+		for (Review review : reviews){
+			if (review.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
+				review.noteReviewUpdate(pseudo1, note);
+			}
+		}
 	}
 	
 	/**

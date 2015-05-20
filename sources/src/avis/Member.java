@@ -18,12 +18,21 @@ public class Member {
 	private String password;
 	private String profil;
 	private float karma;
+	private int nbNoteKarma;
 	
 	public Member (String pseudo, String password, String profil){
 		this.pseudo = pseudo;
 		this.password = password;
 		this.profil = profil;
-		karma = 5;
+		karma = 2.5f;
+		nbNoteKarma = 0;
+	}
+	
+	public void karmaUpdate(float note){
+		float temp1 = karma*nbNoteKarma;
+		float temp2 = temp1+note;
+		nbNoteKarma++;
+		karma=temp2/nbNoteKarma;
 	}
 	
 	//Accesseur du pseudo 

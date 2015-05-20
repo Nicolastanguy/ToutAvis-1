@@ -350,11 +350,22 @@ public class SocialNetwork {
 		if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
 		
 		//__Ajout du review__\\
-		//Comparaison des titres de film pour trouver le film à évaluer
+		
 		float tempAverageRating = 0.0f;
+		float coef = 0.0f;
+		
+		//Récupération du karma du membre
+		for (Member member : members){
+			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
+				coef=member.getKarma();
+			}
+		}
+		
+		//Comparaison des titres de film pour trouver le film à évaluer
 		for (Item itemfilm : items){
 			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
-				itemfilm.addReviewToItem(note, commentaire, pseudo);
+				itemfilm.deletePreviousMemberReview(pseudo);
+				itemfilm.addReviewToItem(note, coef, commentaire, pseudo);
 				itemfilm.averageRating();
 				tempAverageRating = itemfilm.getAverageRating();
 			}
@@ -418,12 +429,22 @@ public class SocialNetwork {
 		if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
 		
 		//__Ajout du review__\\
-		//Comparaison des titres de livre pour trouver le livre à évaluer
+
 		float tempAverageRating = 0.0f;
+		float coef = 0.0f;
+		
+		//Récupération du karma du membre
+		for (Member member : members){
+			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
+				coef=member.getKarma();
+			}
+		}
+		
+		//Comparaison des titres de livre pour trouver le livre à évaluer
 		for (Item itembook : items){
 			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
 				itembook.deletePreviousMemberReview(pseudo);
-				itembook.addReviewToItem(note, commentaire, pseudo);
+				itembook.addReviewToItem(note, coef, commentaire, pseudo);
 				itembook.averageRating();
 				tempAverageRating = itembook.getAverageRating();
 			}
@@ -473,9 +494,37 @@ public class SocialNetwork {
 		//Est-ce que le membre n'a pas déjà noté cet avis?\\
 			
 		//__Ajout de la note__\\
-			//Ajout du pseudo dans la linkedList reviewOpinions de l'objet review
-			//mise à jour de la note (par rapport au nombre de personne ayant déjà noté l'avis)
-			//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
+
+
+			if (type=="livre"){
+				//Mise à jour de la note du review (par rapport au nombre de personne ayant déjà noté l'avis)
+				for (Item itembook : items){
+					if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
+						itembook.addNoteToReview(pseudo1, pseudo2, note);
+					}
+				}
+				//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
+				for (Member member : members){
+					if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
+						member.karmaUpdate(note);
+					}
+				}
+			}
+			if (type=="film"){
+				//Mise à jour de la note du review (par rapport au nombre de personne ayant déjà noté l'avis)
+				for (Item itemfilm : items){
+					if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
+						itemfilm.addNoteToReview(pseudo1, pseudo2, note);
+					}
+				}
+				//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
+				for (Member member : members){
+					if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
+						member.karmaUpdate(note);
+					}
+				}
+			}
+			else System.out.println("Le type renseigné est incorrect");
 	}
 
 	/**

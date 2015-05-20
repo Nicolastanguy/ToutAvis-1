@@ -23,7 +23,7 @@ public class TestRendement {
 		long tac = 0;
 		long duration = 0; 
 		int nbTests = 0;
-		int nbErreurs = 0;		
+		int nbErreurs = 0;
 		int nbMaxMember = 500;
 		int nbMaxBooks = 2500;
 		int nbMaxFilms = 2500;
@@ -119,6 +119,14 @@ public class TestRendement {
 			System.out.println("	La consultation d'un item est trop long ("+duration+" ns)");
 			nbErreurs++;
 		}else System.out.println("		Durée pour la recherche d'un item (ConsultItems) : "+duration+" ns");
+		
+	//Test sur l'espace disque
+
+		nbTests++;
+		if ((Runtime.getRuntime().totalMemory()/1000)>100000000) {
+			System.out.println("	Le programme est trop lourd.");
+			nbErreurs++;
+		}
 		
 	// bilan du test de addItemBook
 		System.out.println("TestAddItemBook :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués\n");
