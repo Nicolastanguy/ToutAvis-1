@@ -24,7 +24,7 @@ public class TestReviewOpinions {
 	
 	// reviewOpinions(String pseudo1, String password,String titre,String type,String pseudo2, float note)
 	
-	public static void sequenceTestReviewOpinions() throws BadEntry, NotItem, NotMember{
+	public static void sequenceTestReviewOpinions()throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists, NotItem{
 		
 		System.out.println("Tests noter les avis/notion de karma (lot2)");
 		
@@ -44,6 +44,7 @@ public class TestReviewOpinions {
 		
 		//Ajout d'avis sur des items déjà existant dans le SN :
 		sn.reviewItemBook("personne1", "psw1", "Arts martiaux", 3.0F, "bien!");
+		
 		
 		// <=> Fiche 9 : Eprouver la méthode reviewOpinions sur les cas d’anomalies BadEntry.
 		// 9.1 : reviewOpinions avec en paramètre un pseudo non instancié 
@@ -75,6 +76,7 @@ public class TestReviewOpinions {
 		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2","Arts martiaux","typeincorrect","Personne1",3.0F,"9.5b"," L'ajout d'une note à un avis a été accepté avec un type différent de book ou de film"); 
 		
 		// <=> Fiche 10 : Eprouver la méthode reviewOpinions dans le cas d’un fonctionnement standard.
+		
 		sn = null; //creation d'un nouveau sn
 		try {
 			sn = TestCreationSN.createNewSocialNetwork();
