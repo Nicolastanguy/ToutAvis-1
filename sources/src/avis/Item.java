@@ -88,7 +88,7 @@ public abstract class Item {
 	public boolean memberAlreadyReviewOpinion(String pseudo1, String pseudo2){
 		//Vérifie si le membre à déjà noté cet avis
 		for (Review review : reviews){
-			if (review.getPseudo().trim().toLowerCase().equals(pseudo1.trim().toLowerCase())) return review.memberAlreadyReviewOpinion(pseudo2);
+			if (review.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())) return review.memberAlreadyReviewOpinion(pseudo1);
 		}
 		return false;
 	}

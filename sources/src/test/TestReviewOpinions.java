@@ -22,16 +22,74 @@ public class TestReviewOpinions {
 		}	
 	}
 	
-	public static int reviewOpinionsOkTest(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur,float karmaAttendu, float moyenneAttendu){
+	public static int reviewOpinionsMemberAlreadyOpinion(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
 		try {
-			float karmaMember;
-			sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);						
-			
+			sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);
 			System.out.println(idTest+messErreur);
+			return 1;
+		}
+		catch (MemberAlreadyOpinion e){
+			return 0;
+		}
+		catch (Exception e){
+			System.out.println(idTest+"Exception non prevue");
+			return 1;
+		}	
+	}
+	
+	public static int reviewOpinionsSameMember(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
+		try {
+			sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);
+			System.out.println(idTest+messErreur);
+			return 1;
+		}
+		catch (SameMember e){
+			return 0;
+		}
+		catch (Exception e){
+			System.out.println(idTest+"Exception non prevue");
+			return 1;
+		}	
+	}
+	public static int reviewOpinionKarmaTestFilm(SocialNetwork sn,String pseudo1, String password,String titre,float note,String idTest,String messErreur, float moyenneAttendue){
+		try {
+			float moyenne;			
+			moyenne = sn.reviewItemBook(pseudo1, password, titre, note, "MDR");
+			moyenne = (float)(Math.round(moyenne*1000));
+			moyenne = moyenne/1000;
+			System.out.println("Moyenne : "+moyenne);
+			System.out.println("Moyenne prevue : "+moyenneAttendue);
+			if(moyenne!=moyenneAttendue){
+				System.out.println(idTest+messErreur);
+				return 1;
+			}
+			return 0;
+		}
+		catch (Exception e){
+			System.out.println(idTest+"Exception non prevue");
+			return 1;
+		}	
+	}
+	
+	
+	public static int reviewOpinionsOkTest(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,float karmaAttendu, float moyenneAttendue){
+		try {
+			float moyenneReview;
+			moyenneReview = sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);
+			
+			if(moyenneAttendue!=moyenneReview){
+				System.out.println(idTest+" La moyenne du review ne correspond pas à la moyenne attendue");
+				return 1;
+			}
+			if(sn.getKarma(pseudo2)!=karmaAttendu){
+				System.out.println(idTest+" Le Karma du membre ne correspond pas au Karma attendu");
+				return 1;
+			}
 			return 0;
 			
 		}
 		catch (BadEntry e){
+			System.out.println(idTest+" badEntry");
 			return 1;
 		}
 		catch (Exception e){
@@ -42,8 +100,8 @@ public class TestReviewOpinions {
 
 	
 	// reviewOpinions(String pseudo1, String password,String titre,String type,String pseudo2, float note)
-	
-	public static void sequenceTestReviewOpinions()throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists, NotItem{
+
+	public static void sequenceTestReviewOpinions()throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists, NotItem, MemberAlreadyOpinion{
 		
 		System.out.println("Tests noter les avis/notion de karma (lot2)");
 		
@@ -107,21 +165,34 @@ public class TestReviewOpinions {
 		sn.reviewItemBook("personne1", "psw1", "La Chine", 4.0F, "bien!");
 		sn.reviewItemBook("personne2", "psw2", "La Chine", 2.5F, "moyen");
 		sn.reviewItemBook("personne3", "psw3", "La Chine", 0.5F, "nul");
+		sn.reviewItemBook("personne2", "psw2", "Le Seigneur des anneaux", 2.5F, "moyen");
 		
-		//Des membres notes l'avis d'un utilisateur : on vérifie la mise à jour du karma et de la note du review
 		
-		//personne2 et personne3 note des avis de personne1
+		//personne2 et personne3 notent des avis de personne1 Verif Karma + moyenne review
+		nbTests++; 
+		nbErreurs += reviewOpinionsOkTest(sn,"personne2","psw2","Arts martiaux","livre","personne1",3.0F,"10.1a",3.0F,3.0F); 
+		nbTests++; 
+		nbErreurs += reviewOpinionsOkTest(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.1b",2.0F,2.0F); 
+		nbTests++; 
+		nbErreurs += reviewOpinionsOkTest(sn,"personne2","psw2","La Chine","livre","personne1",5.0F,"10.1c",3.0F,5.0F); 
+		nbTests++; 
+		nbErreurs += reviewOpinionsOkTest(sn,"personne3","psw3","La Chine","livre","personne1",2.3F,"10.1d",2.825F,3.65F); 
 		
-//		reviewOpinionsOkTest(sn,"personne2","psw2","Arts martiaux","book","personne1",3.0F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",3.0F,3.0F); 
-//		reviewOpinionsOkTest(sn,"personne3","psw3","Arts martiaux","book","personne1",1.0F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",2.0F,2.0F); 
-//		
-//		reviewOpinionsOkTest(sn,"personne2","psw2","La Chine","book","personne1",5.0F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",3.0F,5.0F); 
-//		reviewOpinionsOkTest(sn,"personne3","psw3","La Chine","book","personne1",2.3F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",2.825F,3,65F); 
-//		//Un membre tente de noter un avis qu'il à déjà noté
+		//Un membre tente de noter un avis qu'il à déjà noté
+		nbTests++; 
+		nbErreurs += reviewOpinionsMemberAlreadyOpinion(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.1e"," Erreur : un membre à noté un avis qu'il avait déjà noté");
+		
 		
 		//Un membre tente de noter ses propres avis
+		nbTests++; 
+		nbErreurs += reviewOpinionsSameMember(sn,"personne1","psw1","Arts martiaux","livre","personne1",1.0F,"10.1f"," Erreur : un membre a noté son propre avis");
 		
 		//Vérifier que le karma des utilisateur à bien une influence sur un avis qu'il poste
+		//personne 1 a un karma de 2.825 après les précédentes opérations
+		//personne 1 poste un avis sur un livre que personne2 a déjà commenté
+		//On vérifie que la moyenne de l'item a bien été modifiée en tenant compte du karma de personne1
+		nbTests++; //3,826 de moy attendue
+		nbErreurs += reviewOpinionKarmaTestFilm(sn,"personne1","psw1","Le Seigneur des anneaux",5.0F,"10.1g"," Erreur : le karma de semble pas influencer la note mise par l'utilisateur", 3.826F);
 		
 		
 		

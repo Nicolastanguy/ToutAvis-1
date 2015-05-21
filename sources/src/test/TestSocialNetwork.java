@@ -7,7 +7,7 @@ public class TestSocialNetwork {
 	protected static int nbErreurs = 0;
 	protected static int nbTests = 0;
 	
-	public static void main (String[] args) throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists,NotItem {
+	public static void main (String[] args) throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists,NotItem,MemberAlreadyOpinion {
 		System.out.println("---TestInitialisation---");
 		TestsInitialisation.sequenceTestsInitialisation(); //Test de d'instanciation d'un nouveau réseau social
 		System.out.println("---TestAddMember---");

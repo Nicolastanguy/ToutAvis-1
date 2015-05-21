@@ -283,7 +283,7 @@ public class SocialNetwork {
 	 * Cette représentation contiendra la note de l'item s'il a été noté.
 	 * (une liste vide si aucun item ne correspond) 
 	 */
-	public LinkedList <String> consultItems(String nom) throws BadEntry {
+	public LinkedList <String> consultItems(String nom) throws BadEntry, NotItem {
 		
 		//___Bad Entry___\\
 		// - nom : doit être différent de null ou avec au moins un caractère autre que des espaces
@@ -291,7 +291,7 @@ public class SocialNetwork {
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		nom = nom.trim().toLowerCase();
 		if(nom.length()<1) throw new BadEntry("Le nom doit contenir au moins un caractère autre que des espaces");
-		
+		if((!isItemBook(nom))&&(!isItemFilm(nom))) throw new NotItem ("Aucun item ne correspond à la recherche");
 		LinkedList<String> itemsFindList = new LinkedList<String>();		
 		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
 			if (item.getTitre().trim().toLowerCase().equals(nom.trim().toLowerCase())) itemsFindList.add(item.titre + " - note moyenne : " + item.averageRating + item.reviews.toString());
@@ -479,7 +479,6 @@ public class SocialNetwork {
 			if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 			if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
 			if (type==null) throw new BadEntry("Le type n'est pas instancié");
-			if (((type.trim().toLowerCase())!="book")&&(type.trim().toLowerCase())!="film") throw new BadEntry("le type est différent de film ou de book");
 			// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
 			if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");		
 			//On retire les blanks du titre avec trim()
@@ -492,9 +491,10 @@ public class SocialNetwork {
 			if (!isMember(pseudo1)) throw new NotMember ("Le pseudo utilisé en identifiant entré n'est pas celui d'un membre enregistré");
 			if (!isMember(pseudo2)) throw new NotMember ("Le pseudo du membre ayant posté l'avis n'est pas celui d'un membre enregistré");
 			if (!isPswCorrespondToPseudo(pseudo1,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
+		
 			
 		//__SameMember__\\
-			if (pseudo1.trim().toLowerCase()==pseudo1.trim().toLowerCase()) throw new SameMember("Un membre n'a pas le droit de noter un de ses propres avis");
+			if (pseudo1.trim().toLowerCase()==pseudo2.trim().toLowerCase()) throw new SameMember("Un membre n'a pas le droit de noter un de ses propres avis");
 			
 			float tempNoteReview = 0.0f;
 			
@@ -546,8 +546,11 @@ public class SocialNetwork {
 				}
 				return tempNoteReview;
 			}
-			else System.out.println("Le type renseigné est incorrect");
-			return tempNoteReview;
+			else {
+				throw new BadEntry("le type est différent de film ou de book");
+			}
+			
+			
 	}
 
 	/**
@@ -628,5 +631,14 @@ public class SocialNetwork {
 			}	
 		}
 		return false;	
+	}
+
+				
+	public float getKarma(String pseudo){
+		
+		for (Member member : members){
+			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) return member.getKarma();
+		}
+		return 0;
 	}
 }

@@ -4,12 +4,13 @@ import exception.BadEntry;
 import exception.ItemBookAlreadyExists;
 import exception.ItemFilmAlreadyExists;
 import exception.MemberAlreadyExists;
+import exception.NotItem;
 import exception.NotMember;
 import avis.SocialNetwork;
 
 public class TestRendement {
 	
-	public static void sequenceTestRendement() throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists {
+	public static void sequenceTestRendement() throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists,NotItem {
 		
 		System.out.println("Tests de rendement du réseau social");
 		

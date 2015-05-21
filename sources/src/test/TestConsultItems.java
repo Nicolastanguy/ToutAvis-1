@@ -2,6 +2,7 @@ package test;
 
 import avis.SocialNetwork;
 import exception.BadEntry;
+import exception.NotItem;
 
 public class TestConsultItems {
 	
@@ -30,7 +31,23 @@ public class TestConsultItems {
 			System.out.println ("Test " + idTest + " : exception non prévue. " + e); 
 			e.printStackTrace();
 			return 1;
+		}		
+	}
+	
+	public static int consultItemsNotItemTest (SocialNetwork sn, String nom, String idTest, String messErreur){
+		try{
+			sn.consultItems (nom);
+			System.out.println ("Test " + idTest + " : " + messErreur);
+			return 1;
 		}
+		catch (NotItem e) {
+			return 0;
+		}
+		catch (Exception e) {
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e); 
+			e.printStackTrace();
+			return 1;
+		}		
 	}
 	
 	public static void sequenceTestConsultItems() {
@@ -72,8 +89,10 @@ public class TestConsultItems {
 		nbErreurs += consultItemsOKTest ( sn, "Interstellar", "12.1b");
 		nbTests++;
 		nbErreurs += consultItemsOKTest ( sn, "Le Seigneur des anneaux", "12.1c");
+		
+		// consultation d'un item inexistant
 		nbTests++;
-		nbErreurs += consultItemsOKTest ( sn, "ItemInexistant", "12.4c");
+		nbErreurs += consultItemsNotItemTest ( sn, "ItemInexistant", "12.4c","La consultation d'un inexistant de déclenche pas d'exception");
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbMembers()!=nbMembers){

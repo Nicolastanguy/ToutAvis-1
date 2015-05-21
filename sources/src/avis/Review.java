@@ -16,6 +16,7 @@ public class Review {
 		this.commentaire = commentaire;
 		this.pseudo = pseudo;
 		this.coef = coef;
+		reviewOpinions = new LinkedList<String>();
 	}
 	
 	public void noteReviewUpdate(String pseudo1, float note){
