@@ -55,17 +55,16 @@ public class SocialNetwork {
 	/** 
 	 * @uml.property name="members"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Member"
+	 * Liste des membres du réseau social
 	 */
 	private LinkedList<Member> members = new LinkedList<Member>();
 	
 	/**
 	 * @uml.property  name="items"
 	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Item"
+	 * Liste des items du réseau social
 	 */
 	private LinkedList<Item> items = new LinkedList<Item>();
-	
-	
-	
 	
 	/**
 	 * constructeur de <i>SocialNetwok</i> 
@@ -633,7 +632,11 @@ public class SocialNetwork {
 		return false;	
 	}
 
-				
+	/**
+	 * Permet d'obtenir le karma du membre grâce au pseudo			
+	 * @param pseudo
+	 * @return karma 
+	 */
 	public float getKarma(String pseudo){
 		
 		for (Member member : members){

@@ -9,17 +9,18 @@ import java.util.LinkedList;
  */
 public class Member {
 	
-	/**
-	 * @uml.property  name="reviews"
-	 * @uml.associationEnd  multiplicity="(0 -1)" ordering="true" inverse="member:avis.Review"
-	 */
-	private LinkedList<Review> reviews;
 	private String pseudo;
 	private String password;
 	private String profil;
 	private float karma;
 	private int nbNoteKarma;
 	
+	/**
+	 * Constructeur de <i> Member </i>
+	 * @param pseudo 
+	 * @param password
+	 * @param profil
+	 */
 	public Member (String pseudo, String password, String profil){
 		this.pseudo = pseudo;
 		this.password = password;
@@ -27,7 +28,11 @@ public class Member {
 		karma = 2.5f;
 		nbNoteKarma = 0;
 	}
-	
+	/**
+	 * Permet de mettre à jour le karma du membre
+	 * Appelée lorsque un autre membre note un avis de ce membre.
+	 * @param note
+	 */
 	public void karmaUpdate(float note){
 		float temp1 = karma*nbNoteKarma;
 		float temp2 = temp1+note;
@@ -35,23 +40,34 @@ public class Member {
 		karma=temp2/nbNoteKarma;
 	}
 	
-	//Accesseur du pseudo 
+	/**
+	 * Accesseur du pseudo du membre
+	 * @return
+	 */
 	public String getPseudo(){
 		return pseudo;
 	}
 	
-	//Accesseur du password
+	/**
+	 * Accesseur du password
+	 * @return
+	 */
 	public String getPassword(){
 		return password;
 	}
-	//Accesseur du karma
-		public float getKarma(){
-			return karma;
-		}
-	
+	/**
+	 * Accesseur du karma
+	 * @return
+	 */
+	public float getKarma(){
+		return karma;
+	}
+	/**
+	 * renvoie un String de description du membre avec son pseudo et son karma.
+	 */
 	public String toString(){
 		//Ne renvoie que le pseudo du membre
-		return ("\n"+pseudo);
+		return ("\n"+pseudo+",karma: "+karma);
 	}
 	
 }
