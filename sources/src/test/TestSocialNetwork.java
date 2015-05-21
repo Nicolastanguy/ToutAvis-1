@@ -1,17 +1,13 @@
 package test;
 
-import exception.BadEntry;
-import exception.ItemBookAlreadyExists;
-import exception.ItemFilmAlreadyExists;
-import exception.MemberAlreadyExists;
-import exception.NotMember;
+import exception.*;
 
 public class TestSocialNetwork {
 	
 	protected static int nbErreurs = 0;
 	protected static int nbTests = 0;
 	
-	public static void main (String[] args) throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists {
+	public static void main (String[] args) throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists,NotItem {
 		System.out.println("---TestInitialisation---");
 		TestsInitialisation.sequenceTestsInitialisation(); //Test de d'instanciation d'un nouveau réseau social
 		System.out.println("---TestAddMember---");
@@ -26,6 +22,9 @@ public class TestSocialNetwork {
 		TestReviewItemFilm.sequenceTestReviewItemFilm(); //Test de reviewItemFilm
 		System.out.println("---TestConsultItems---");
 		TestConsultItems.sequenceTestConsultItems(); //Test de consultItems
+		System.out.println("---TestReviewOpinions---");
+		TestReviewOpinions.sequenceTestReviewOpinions(); //Test de consultItems
+		
 		System.out.println("---TestRendement---");
 		TestRendement.sequenceTestRendement(); //Test du rendement
 		System.out.println("--------------------------------------------");
