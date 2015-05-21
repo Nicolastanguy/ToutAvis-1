@@ -25,7 +25,19 @@ public class Review {
 		noteReview=temp2/reviewOpinions.size();
 	}
 	
-	//accesseur de la note d'un avis
+	public boolean memberAlreadyReviewOpinion(String pseudo2){
+		for (String reviewOpinion : reviewOpinions){
+			if (reviewOpinion.trim().toLowerCase().equals(pseudo2.trim().toLowerCase())) return true;
+		}
+		return false;
+	}
+	
+	//accesseur de la note moyenne d'un avis
+	public float getNoteReview(){
+		return noteReview;
+	}
+	
+	//accesseur de la note de l'avis sur l'item
 	public float getNote(){
 		return note;
 	}

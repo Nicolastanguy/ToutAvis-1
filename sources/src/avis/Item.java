@@ -67,6 +67,33 @@ public abstract class Item {
 	}
 	
 	/**
+	 * 
+	 * 
+	 */	
+	public float getNoteReview(String pseudo1, String pseudo2){
+		for (Review review : reviews){
+			if (review.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())) return review.getNoteReview();
+		}
+		return 0;
+	}
+	
+	public boolean isMemberReview(String pseudo){
+		//Vérifie si le membre a bien commenté l'item
+		for (Review review : reviews){
+			if (review.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) return true;
+		}
+		return false;
+	}
+	
+	public boolean memberAlreadyReviewOpinion(String pseudo1, String pseudo2){
+		//Vérifie si le membre à déjà noté cet avis
+		for (Review review : reviews){
+			if (review.getPseudo().trim().toLowerCase().equals(pseudo1.trim().toLowerCase())) return review.memberAlreadyReviewOpinion(pseudo2);
+		}
+		return false;
+	}
+	
+	/**
 	 * Accesseur du titre de l'item
 	 * @return
 	 */
