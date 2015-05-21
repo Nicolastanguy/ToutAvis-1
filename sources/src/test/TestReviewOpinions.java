@@ -3,6 +3,7 @@ package test;
 import exception.*;
 import avis.SocialNetwork;
 import test.TestCreationSN;
+import avis.Member;
 
 public class TestReviewOpinions {
 	
@@ -14,6 +15,24 @@ public class TestReviewOpinions {
 		}
 		catch (BadEntry e){
 			return 0;
+		}
+		catch (Exception e){
+			System.out.println(idTest+"Exception non prevue");
+			return 1;
+		}	
+	}
+	
+	public static int reviewOpinionsOkTest(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur,float karmaAttendu, float moyenneAttendu){
+		try {
+			float karmaMember;
+			sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);						
+			
+			System.out.println(idTest+messErreur);
+			return 0;
+			
+		}
+		catch (BadEntry e){
+			return 1;
 		}
 		catch (Exception e){
 			System.out.println(idTest+"Exception non prevue");
@@ -40,11 +59,7 @@ public class TestReviewOpinions {
 		int nbBooks = sn.nbBooks();
 
 		int nbTests = 0;
-		int nbErreurs = 0;
-		
-		//Ajout d'avis sur des items déjà existant dans le SN :
-		sn.reviewItemBook("personne1", "psw1", "Arts martiaux", 3.0F, "bien!");
-		
+		int nbErreurs = 0;		
 		
 		// <=> Fiche 9 : Eprouver la méthode reviewOpinions sur les cas d’anomalies BadEntry.
 		// 9.1 : reviewOpinions avec en paramètre un pseudo non instancié 
@@ -85,6 +100,28 @@ public class TestReviewOpinions {
 			System.out.println("Erreur lors de la création du SN de test");
 		}
 		
+		//Ajout d'avis sur des items déjà existant dans le SN :
+		sn.reviewItemBook("personne1", "psw1", "Arts martiaux", 4.0F, "bien!");
+		sn.reviewItemBook("personne2", "psw2", "Arts martiaux", 2.5F, "moyen");
+		sn.reviewItemBook("personne3", "psw3", "Arts martiaux", 0.5F, "nul");
+		sn.reviewItemBook("personne1", "psw1", "La Chine", 4.0F, "bien!");
+		sn.reviewItemBook("personne2", "psw2", "La Chine", 2.5F, "moyen");
+		sn.reviewItemBook("personne3", "psw3", "La Chine", 0.5F, "nul");
+		
+		//Des membres notes l'avis d'un utilisateur : on vérifie la mise à jour du karma et de la note du review
+		
+		//personne2 et personne3 note des avis de personne1
+		
+//		reviewOpinionsOkTest(sn,"personne2","psw2","Arts martiaux","book","personne1",3.0F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",3.0F,3.0F); 
+//		reviewOpinionsOkTest(sn,"personne3","psw3","Arts martiaux","book","personne1",1.0F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",2.0F,2.0F); 
+//		
+//		reviewOpinionsOkTest(sn,"personne2","psw2","La Chine","book","personne1",5.0F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",3.0F,5.0F); 
+//		reviewOpinionsOkTest(sn,"personne3","psw3","La Chine","book","personne1",2.3F,"9.3a"," Le karma de l'utilisateur noté n'a pas la valeur attendue",2.825F,3,65F); 
+//		//Un membre tente de noter un avis qu'il à déjà noté
+		
+		//Un membre tente de noter ses propres avis
+		
+		//Vérifier que le karma des utilisateur à bien une influence sur un avis qu'il poste
 		
 		
 		
