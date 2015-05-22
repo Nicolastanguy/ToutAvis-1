@@ -123,15 +123,19 @@ public class SocialNetwork {
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		
 		//__BadEntry__\\
+		
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+		
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		
 		// - profil : doit être différent de null
 		if (profil==null) throw new BadEntry("Le profil du membre n'est pas instancié");		
 		
@@ -174,26 +178,33 @@ public class SocialNetwork {
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 		
 		//___Bad Entry___\\
+		
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		
 		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
 		if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");
 		//On retire les blanks du titre avec trim()
 		titre = titre.trim().toLowerCase();
 		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		
 		// - genre : doit être différent de null
 		if (genre==null) throw new BadEntry ("Le genre du film n'est pas instancié");
+		
 		// - réalisateur : doit être différent de null
 		if (realisateur==null) throw new BadEntry ("Le realisateur du film n'est pas instancié");
+		
 		// - scenariste : doit être différent de null
 		if (scenariste==null) throw new BadEntry ("Le scenariste du film n'est pas instancié");
+		
 		// - durée : doit être positive
 		if (duree<=0) throw new BadEntry ("La duree du film doit être positive");		
 		
@@ -237,24 +248,30 @@ public class SocialNetwork {
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
 		//___Bad Entry___\\
+		
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		
 		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
 		if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");
 		//On retire les blanks du titre avec trim()
 		titre = titre.trim().toLowerCase();
 		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		
 		// - genre : doit être différent de null
 		if (genre==null) throw new BadEntry ("Le genre du livre n'est pas instancié");
+		
 		// - auteur : doit être différent de null
 		if (auteur==null) throw new BadEntry ("L'auteur du livre n'est pas instancié");
+		
 		// - nbPages : doit être positif
 		if (nbPages<=0) throw new BadEntry ("Le nombre de page du livre doit être positif");		
 		
@@ -325,22 +342,27 @@ public class SocialNetwork {
 	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
 		//___Bad Entry___\\
+		
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		
 		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
 		if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");		
 		//On retire les blanks du titre avec trim()
 		titre = titre.trim().toLowerCase();
 		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		
 		// - note : doit être comprise entre 0.0 et 5.0
 		if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
+		
 		// - commentaire : doit être différent de null
 		if (commentaire==null) throw new BadEntry("Le commentaire n'est pas instancié");
 		
@@ -404,22 +426,27 @@ public class SocialNetwork {
 	public float reviewItemBook(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
 		//___Bad Entry___\\
+		
 		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		pseudo = pseudo.trim().toLowerCase();
 		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+		
 		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		
 		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
 		if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");		
 		//On retire les blanks du titre avec trim()
 		titre = titre.trim().toLowerCase();
 		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+		
 		// - note : doit être comprise entre 0.0 et 5.0
 		if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
+		
 		// - commentaire : doit être différent de null
 		if (commentaire==null) throw new BadEntry("Le commentaire n'est pas instancié");
 		
@@ -464,7 +491,9 @@ public class SocialNetwork {
 	 * @param note note donnée à l'avis
 	 */
 	public float reviewOpinions(String pseudo1,String password,String titre,String type,String pseudo2,float note) throws BadEntry, NotMember, NotItem, NotReview, MemberAlreadyOpinion, SameMember{
+
 		//___Bad Entry___\\
+		
 			// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
 			if (pseudo1==null) throw new BadEntry("Le pseudo1 n'est pas instancié");
 			if (pseudo2==null) throw new BadEntry("Le pseudo2 n'est pas instancié");
@@ -473,16 +502,19 @@ public class SocialNetwork {
 			pseudo2 = pseudo2.trim().toLowerCase();
 			if (pseudo1.length()<1) throw new BadEntry("Le pseudo1 doit contenir au moins un caractère autre que des espaces");
 			if (pseudo2.length()<1) throw new BadEntry("Le pseudo2 doit contenir au moins un caractère autre que des espaces");
+			
 			// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
 			if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
 			if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
 			if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
 			if (type==null) throw new BadEntry("Le type n'est pas instancié");
+			
 			// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
 			if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");		
 			//On retire les blanks du titre avec trim()
 			titre = titre.trim().toLowerCase();
 			if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+			
 			// - note : doit être comprise entre 0.0 et 5.0
 			if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
 		
