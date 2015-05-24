@@ -54,8 +54,7 @@ public class SocialNetwork {
 	
 	/** 
 	 * @uml.property name="members"
-	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Member"
-	 * Liste des membres du réseau social
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="sn:avis.Member"
 	 */
 	private LinkedList<Member> members = new LinkedList<Member>();
 	
@@ -141,10 +140,15 @@ public class SocialNetwork {
 		
 		//__MemberAlreadyExists__\\
 		if (members.size()!=0){	
-			if (isMember(pseudo)) throw new MemberAlreadyExists("Le pseudo est déjà utilisé");
+			//on regarde si le pseudo n'est pas déjà utilisé
+			for(Member member : members){
+				if(member.isMember(pseudo)!=null){
+					throw new MemberAlreadyExists("Le pseudo est déjà utilisé");
+				}
+			}
 		}
 				
-		Member newMember = new Member(pseudo,password,profil); //création du nouveau membre
+		Member newMember = new Member(pseudo,password,profil,this); //création du nouveau membre, this = le SocialNetwork
 		members.add(newMember); //Ajour de ce membre à la linkedList des membres
 		nbMembers++;
 	}
@@ -177,48 +181,60 @@ public class SocialNetwork {
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
 		
+		Member findMember = null;
 		//___Bad Entry___\\
 		
-		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
-		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
-		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
+			if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+			//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+			pseudo = pseudo.trim().toLowerCase();
+			if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			
+			// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
+			if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
+			if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+			if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+			
+			// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
+			if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");
+			//On retire les blanks du titre avec trim()
+			titre = titre.trim().toLowerCase();
+			if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+			
+			// - genre : doit être différent de null
+			if (genre==null) throw new BadEntry ("Le genre du film n'est pas instancié");
+			
+			// - réalisateur : doit être différent de null
+			if (realisateur==null) throw new BadEntry ("Le realisateur du film n'est pas instancié");
+			
+			// - scenariste : doit être différent de null
+			if (scenariste==null) throw new BadEntry ("Le scenariste du film n'est pas instancié");
+			
+			// - durée : doit être positive
+			if (duree<=0) throw new BadEntry ("La duree du film doit être positive");		
 		
-		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
-		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
-		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
-		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+		//__NotMember__\\	
+			for(Member member : members){
+				findMember = member.isMember(pseudo);
+				if(findMember!=null) break; //on stop la recherche si le membre est trouvé
+			}
+			//si aucun membre correspondant n'a été trouvé on lève l'exception NotMember
+			if(findMember==null) {
+				throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+			}
+			//sinon on test le mot de passe, on lève l'exception NotMember si le password est faux
+			else{
+				if (findMember.isPassword(password)==false) throw new NotMember ("Le couple pseudo/password est incorrect");
+			}
 		
-		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
-		if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");
-		//On retire les blanks du titre avec trim()
-		titre = titre.trim().toLowerCase();
-		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
-		
-		// - genre : doit être différent de null
-		if (genre==null) throw new BadEntry ("Le genre du film n'est pas instancié");
-		
-		// - réalisateur : doit être différent de null
-		if (realisateur==null) throw new BadEntry ("Le realisateur du film n'est pas instancié");
-		
-		// - scenariste : doit être différent de null
-		if (scenariste==null) throw new BadEntry ("Le scenariste du film n'est pas instancié");
-		
-		// - durée : doit être positive
-		if (duree<=0) throw new BadEntry ("La duree du film doit être positive");		
-		
-		//__NotMember__\\
-		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
-		
+	
 		//__ItemFilmAlreadyExists__\\
-		if (isItemFilm(titre)) throw new ItemFilmAlreadyExists ("Un film avec un titre identique existe déjà");
+			if (isItemFilm(titre)) throw new ItemFilmAlreadyExists ("Un film avec un titre identique existe déjà");
 		
 		//__Ajout du film__\\
-		Item newFilm = new ItemFilm(titre, genre, realisateur, scenariste, duree);
-		items.add(newFilm);
-		nbFilms++;
+			Item newFilm = new ItemFilm(titre, genre, realisateur, scenariste, duree);
+			items.add(newFilm);
+			nbFilms++;
 	}
 
 	/**
@@ -247,45 +263,56 @@ public class SocialNetwork {
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
+		Member findMember = null;
 		//___Bad Entry___\\
 		
-		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
-		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
-		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
+			if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+			//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+			pseudo = pseudo.trim().toLowerCase();
+			if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			
+			// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
+			if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
+			if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+			if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+			
+			// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
+			if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");
+			//On retire les blanks du titre avec trim()
+			titre = titre.trim().toLowerCase();
+			if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+			
+			// - genre : doit être différent de null
+			if (genre==null) throw new BadEntry ("Le genre du livre n'est pas instancié");
+			
+			// - auteur : doit être différent de null
+			if (auteur==null) throw new BadEntry ("L'auteur du livre n'est pas instancié");
+			
+			// - nbPages : doit être positif
+			if (nbPages<=0) throw new BadEntry ("Le nombre de page du livre doit être positif");		
 		
-		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
-		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
-		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
-		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
-		
-		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces
-		if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");
-		//On retire les blanks du titre avec trim()
-		titre = titre.trim().toLowerCase();
-		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
-		
-		// - genre : doit être différent de null
-		if (genre==null) throw new BadEntry ("Le genre du livre n'est pas instancié");
-		
-		// - auteur : doit être différent de null
-		if (auteur==null) throw new BadEntry ("L'auteur du livre n'est pas instancié");
-		
-		// - nbPages : doit être positif
-		if (nbPages<=0) throw new BadEntry ("Le nombre de page du livre doit être positif");		
-		
-		//__NotMember__\\
-		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
+		//__NotMember__\\	
+			for(Member member : members){
+				findMember = member.isMember(pseudo);
+				if(findMember!=null) break; //on stop la recherche si le membre est trouvé
+			}
+			//si aucun membre correspondant n'a été trouvé on lève l'exception NotMember
+			if(findMember==null) {
+				throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+			}
+			//sinon on test le mot de passe, on lève l'exception NotMember si le password est faux
+			else{
+				if (findMember.isPassword(password)==false) throw new NotMember ("Le couple pseudo/password est incorrect");
+			}
 		
 		//__ItemFilmAlreadyExists__\\
-		if (isItemBook(titre)) throw new ItemBookAlreadyExists ("Un livre avec un titre identique existe déjà");
+			if (isItemBook(titre)) throw new ItemBookAlreadyExists ("Un livre avec un titre identique existe déjà");
 		
 		//__Ajout du livre__\\
-		ItemBook newBook = new ItemBook(titre, genre, auteur, nbPages);
-		items.add(newBook);
-		nbBooks++;
+			ItemBook newBook = new ItemBook(titre, genre, auteur, nbPages);
+			items.add(newBook);
+			nbBooks++;
 	}
 
 	/**
@@ -341,60 +368,71 @@ public class SocialNetwork {
 	 */
 	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
+		Member findMember=null; 
 		//___Bad Entry___\\
 		
-		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
-		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
-		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
+			if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+			//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+			pseudo = pseudo.trim().toLowerCase();
+			if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			
+			// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
+			if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
+			if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+			if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+			
+			// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
+			if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");		
+			//On retire les blanks du titre avec trim()
+			titre = titre.trim().toLowerCase();
+			if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+			
+			// - note : doit être comprise entre 0.0 et 5.0
+			if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
+			
+			// - commentaire : doit être différent de null
+			if (commentaire==null) throw new BadEntry("Le commentaire n'est pas instancié");
 		
-		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
-		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
-		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
-		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
-		
-		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
-		if (titre==null) throw new BadEntry ("Le titre du film n'est pas instancié");		
-		//On retire les blanks du titre avec trim()
-		titre = titre.trim().toLowerCase();
-		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
-		
-		// - note : doit être comprise entre 0.0 et 5.0
-		if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
-		
-		// - commentaire : doit être différent de null
-		if (commentaire==null) throw new BadEntry("Le commentaire n'est pas instancié");
-		
-		//__NotMember__\\
-		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
-		
+		//__NotMember__\\	
+			for(Member member : members){
+				findMember = member.isMember(pseudo);
+				if(findMember!=null) break; //on stop la recherche si le membre est trouvé
+			}
+			//si aucun membre correspondant n'a été trouvé on lève l'exception NotMember
+			if(findMember==null) {
+				throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+			}
+			//sinon on test le mot de passe, on lève l'exception NotMember si le password est faux
+			else{
+				if (findMember.isPassword(password)==false) throw new NotMember ("Le couple pseudo/password est incorrect");
+			}
+	
 		//__NotItem__\\
-		if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
+			if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
 		
 		//__Ajout du review__\\
 		
-		float tempAverageRating = 0.0f;
-		float coef = 0.0f;
-		
+			float tempAverageRating = 0.0f;
+			float coef = 0.0f;
+			
 		//Récupération du karma du membre
-		for (Member member : members){
-			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
-				coef=member.getKarma();
+			for (Member member : members){
+				if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
+					coef=member.getKarma();
+				}
 			}
-		}
 		
 		//Comparaison des titres de film pour trouver le film à évaluer
-		for (Item itemfilm : items){
-			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
-				itemfilm.deletePreviousMemberReview(pseudo);
-				itemfilm.addReviewToItem(note, coef, commentaire, pseudo);
-				itemfilm.averageRating();
-				tempAverageRating = itemfilm.getAverageRating();
+			for (Item itemfilm : items){
+				if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
+					itemfilm.deletePreviousMemberReview(pseudo);
+					itemfilm.addReviewToItem(note, coef, commentaire, pseudo);
+					itemfilm.averageRating();
+					tempAverageRating = itemfilm.getAverageRating();
+				}
 			}
-		}
-		return tempAverageRating;
+			return tempAverageRating;
 	}
 
 
@@ -425,60 +463,71 @@ public class SocialNetwork {
 	 */
 	public float reviewItemBook(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
 		
+		Member findMember=null;
 		//___Bad Entry___\\
 		
-		// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
-		if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
-		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
-		pseudo = pseudo.trim().toLowerCase();
-		if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
+			if (pseudo==null) throw new BadEntry("Le pseudo n'est pas instancié");
+			//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
+			pseudo = pseudo.trim().toLowerCase();
+			if (pseudo.length()<1) throw new BadEntry("Le pseudo doit contenir au moins un caractère autre que des espaces");
+			
+			// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
+			if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
+			if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
+			if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
+			
+			// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
+			if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");		
+			//On retire les blanks du titre avec trim()
+			titre = titre.trim().toLowerCase();
+			if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
+			
+			// - note : doit être comprise entre 0.0 et 5.0
+			if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
+			
+			// - commentaire : doit être différent de null
+			if (commentaire==null) throw new BadEntry("Le commentaire n'est pas instancié");
 		
-		// - password : doit être différent de null, contenir au moins 4 caractères autre que des leadings ou trailing blanks
-		if (password==null) throw new BadEntry("Le mot de passe n'est pas instancié");
-		if (password.contains(" ")) throw new BadEntry ("Le password ne doit pas contenir d'espace");
-		if (password.length()<4) throw new BadEntry ("Le password doit contenir au moins 4 caractères");
-		
-		// - titre : doit être différent de null et contenir au moins 1 caractère autre que des espaces.
-		if (titre==null) throw new BadEntry ("Le titre du livre n'est pas instancié");		
-		//On retire les blanks du titre avec trim()
-		titre = titre.trim().toLowerCase();
-		if (titre.length()<1) throw new BadEntry("Le titre doit contenir au moins un caractère autre que des espaces");
-		
-		// - note : doit être comprise entre 0.0 et 5.0
-		if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
-		
-		// - commentaire : doit être différent de null
-		if (commentaire==null) throw new BadEntry("Le commentaire n'est pas instancié");
-		
-		//__NotMember__\\
-		if (!isMember(pseudo)) throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
-		if (!isPswCorrespondToPseudo(pseudo,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
-		
+		//__NotMember__\\	
+			for(Member member : members){
+				findMember = member.isMember(pseudo);
+				if(findMember!=null) break; //on stop la recherche si le membre est trouvé
+			}
+			//si aucun membre correspondant n'a été trouvé on lève l'exception NotMember
+			if(findMember==null) {
+				throw new NotMember ("Le pseudo entré n'est pas celui d'un membre enregistré");
+			}
+			//sinon on test le mot de passe, on lève l'exception NotMember si le password est faux
+			else{
+				if (findMember.isPassword(password)==false) throw new NotMember ("Le couple pseudo/password est incorrect");
+			}
+	
 		//__NotItem__\\
-		if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
+			if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
 		
 		//__Ajout du review__\\
 
-		float tempAverageRating = 0.0f;
-		float coef = 0.0f;
-		
-		//Récupération du karma du membre
-		for (Member member : members){
-			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
-				coef=member.getKarma();
+			float tempAverageRating = 0.0f;
+			float coef = 0.0f;
+			
+			//Récupération du karma du membre
+			for (Member member : members){
+				if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
+					coef=member.getKarma();
+				}
 			}
-		}
 		
 		//Comparaison des titres de livre pour trouver le livre à évaluer
-		for (Item itembook : items){
-			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
-				itembook.deletePreviousMemberReview(pseudo);
-				itembook.addReviewToItem(note, coef, commentaire, pseudo);
-				itembook.averageRating();
-				tempAverageRating = itembook.getAverageRating();
+			for (Item itembook : items){
+				if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
+					itembook.deletePreviousMemberReview(pseudo);
+					itembook.addReviewToItem(note, coef, commentaire, pseudo);
+					itembook.averageRating();
+					tempAverageRating = itembook.getAverageRating();
+				}
 			}
-		}
-		return tempAverageRating;
+			return tempAverageRating;
 	}
 	
 	/**
@@ -491,7 +540,8 @@ public class SocialNetwork {
 	 * @param note note donnée à l'avis
 	 */
 	public float reviewOpinions(String pseudo1,String password,String titre,String type,String pseudo2,float note) throws BadEntry, NotMember, NotItem, NotReview, MemberAlreadyOpinion, SameMember{
-
+		Member findMember1 = null;
+		Member findMember2 = null;
 		//___Bad Entry___\\
 		
 			// - pseudo : doit être différent de null ou avec au moins 1 caractère autre que des espaces
@@ -517,70 +567,87 @@ public class SocialNetwork {
 			
 			// - note : doit être comprise entre 0.0 et 5.0
 			if (note<0.0f || note>5.0f) throw new BadEntry("La note doit être comprise entre 0.0 et 5.0");
-		
-		//__NotMember__\\
-			if (!isMember(pseudo1)) throw new NotMember ("Le pseudo utilisé en identifiant entré n'est pas celui d'un membre enregistré");
-			if (!isMember(pseudo2)) throw new NotMember ("Le pseudo du membre ayant posté l'avis n'est pas celui d'un membre enregistré");
-			if (!isPswCorrespondToPseudo(pseudo1,password)) throw new NotMember ("Le couple pseudo/password est incorrect");
-		
 			
 		//__SameMember__\\
 			if (pseudo1.trim().toLowerCase()==pseudo2.trim().toLowerCase()) throw new SameMember("Un membre n'a pas le droit de noter un de ses propres avis");
-			
-			float tempNoteReview = 0.0f;
-			
-			if (type=="livre"){
-				//__NotItem__\\
-				if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
+		
+		//__NotMember__\\
+			for(Member member : members){
+				findMember1 = member.isMember(pseudo1);
+				if(findMember1!=null) break; //on stop la recherche si le membre est trouvé
 				
-				for (Item itembook : items){
-					if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
-						//Est-ce que le pseudo 2 à bien commenté cet item?\\
-						if (!itembook.isMemberReview(pseudo2)) throw new NotReview("Aucun avis n'a été posté par ce membre sur ce livre.");
-						//Est-ce que le membre n'a pas déjà noté cet avis?\\
-						if (itembook.memberAlreadyReviewOpinion(pseudo1, pseudo2)) throw new MemberAlreadyOpinion("Le membre à déjà noté cet avis.");
-						//Mise à jour de la note du review (par rapport au nombre de personne ayant déjà noté l'avis)
-						itembook.addNoteToReview(pseudo1, pseudo2, note);
-						//Récupération de la moyenne obtenue
-						tempNoteReview=itembook.getNoteReview(pseudo1, pseudo2);
-					}
-				}
-				//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
-				for (Member member : members){
-					if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
-						member.karmaUpdate(note);
-					}
-				}
-				return tempNoteReview;
 			}
-			if (type=="film"){
-				//__NotItem__\\
-				if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
-				
-				for (Item itemfilm : items){
-					if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
-						//Est-ce que le pseudo 2 à bien commenté cet item?\\
-						if (!itemfilm.isMemberReview(pseudo2)) throw new NotReview("Aucun avis n'a été posté par ce membre sur ce film.");
-						//Est-ce que le membre n'a pas déjà noté cet avis?\\
-						if (itemfilm.memberAlreadyReviewOpinion(pseudo1, pseudo2)) throw new MemberAlreadyOpinion("Le membre à déjà noté cet avis.");
-						//Mise à jour de la note du review (par rapport au nombre de personne ayant déjà noté l'avis)
-						itemfilm.addNoteToReview(pseudo1, pseudo2, note);
-						//Récupération de la moyenne obtenue
-						tempNoteReview=itemfilm.getNoteReview(pseudo1, pseudo2);
-					}
-				}
-				//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
-				for (Member member : members){
-					if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
-						member.karmaUpdate(note);
-					}
-				}
-				return tempNoteReview;
+			for(Member member : members){
+				findMember2 = member.isMember(pseudo2);
+				if(findMember2!=null) break; //on stop la recherche si le membre est trouvé
 			}
-			else {
-				throw new BadEntry("le type est différent de film ou de book");
+			//si le pseudo1 n'a pas été trouvé on lève l'exception NotMember
+			if(findMember1==null) {
+				throw new NotMember ("Le pseudo utilisé en identifiant entré n'est pas celui d'un membre enregistré");
 			}
+			//sinon on test le mot de passe, on lève l'exception NotMember si le password est faux
+			else{
+				if (findMember1.isPassword(password)==false) throw new NotMember ("Le couple pseudo1/password est incorrect");
+			}			
+			//si le pseudo2 n'a pas été trouvé on lève l'exception NotMember
+			if(findMember2==null) {
+				throw new NotMember ("Le pseudo du membre ayant posté l'avis n'est pas celui d'un membre enregistré");
+			}			
+	
+		float tempNoteReview = 0.0f;
+		
+		if (type=="livre"){
+			//__NotItem__\\
+			if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
 			
+			for (Item itembook : items){
+				if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
+					//Est-ce que le pseudo 2 à bien commenté cet item?\\
+					if (!itembook.isMemberReview(pseudo2)) throw new NotReview("Aucun avis n'a été posté par ce membre sur ce livre.");
+					//Est-ce que le membre n'a pas déjà noté cet avis?\\
+					if (itembook.memberAlreadyReviewOpinion(pseudo1, pseudo2)) throw new MemberAlreadyOpinion("Le membre à déjà noté cet avis.");
+					//Mise à jour de la note du review (par rapport au nombre de personne ayant déjà noté l'avis)
+					itembook.addNoteToReview(pseudo1, pseudo2, note);
+					//Récupération de la moyenne obtenue
+					tempNoteReview=itembook.getNoteReview(pseudo1, pseudo2);
+				}
+			}
+			//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
+			for (Member member : members){
+				if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
+					member.karmaUpdate(note);
+				}
+			}
+			return tempNoteReview;
+		}
+		if (type=="film"){
+			//__NotItem__\\
+			if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
+			
+			for (Item itemfilm : items){
+				if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
+					//Est-ce que le pseudo 2 à bien commenté cet item?\\
+					if (!itemfilm.isMemberReview(pseudo2)) throw new NotReview("Aucun avis n'a été posté par ce membre sur ce film.");
+					//Est-ce que le membre n'a pas déjà noté cet avis?\\
+					if (itemfilm.memberAlreadyReviewOpinion(pseudo1, pseudo2)) throw new MemberAlreadyOpinion("Le membre à déjà noté cet avis.");
+					//Mise à jour de la note du review (par rapport au nombre de personne ayant déjà noté l'avis)
+					itemfilm.addNoteToReview(pseudo1, pseudo2, note);
+					//Récupération de la moyenne obtenue
+					tempNoteReview=itemfilm.getNoteReview(pseudo1, pseudo2);
+				}
+			}
+			//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
+			for (Member member : members){
+				if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
+					member.karmaUpdate(note);
+				}
+			}
+			return tempNoteReview;
+		}
+		else {
+			throw new BadEntry("le type est différent de film ou de book");
+		}
+		
 			
 	}
 
@@ -610,18 +677,6 @@ public class SocialNetwork {
 				);
 	}
 
-	/**
-	 * Permet de savoir si le pseudo est déjà utilisé dans la liste des membres enregistrés
-	 * @param pseudo
-	 * @return True si le pseudo est déjà présent dans la liste des membres / False sinon
-	 */
-	private boolean isMember(String pseudo){
-		//Comparaison des pseudos de la liste de membres avec le pseudo passé en paramètre
-		for (Member member : members){
-			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())) return true;
-		}
-		return false;
-	}
 	
 	/**
 	 * Permet de savoir si l'item film est déjà présent dans la liste des items films du réseau social
@@ -649,20 +704,6 @@ public class SocialNetwork {
 		return false;
 	}
 
-	/**
-	 * Permet de savoir si le mot de passe correspond bien au pseudo passé en paramètre
-	 * @param pseudo, password
-	 * @return True si le mot de passe est bien celui du membre enregistré passé en paramètre / False sinon
-	 */
-	private boolean isPswCorrespondToPseudo(String pseudo, String password){
-		//Comparaison des pseudos de la liste de membres avec le pseudo passé en paramètre
-		for (Member member : members){
-			if (member.getPseudo().trim().toLowerCase().equals(pseudo.trim().toLowerCase())){
-				if(member.getPassword().trim().toLowerCase().equals(password)) return true;
-			}	
-		}
-		return false;	
-	}
 
 	/**
 	 * Permet d'obtenir le karma du membre grâce au pseudo			
