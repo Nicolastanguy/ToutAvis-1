@@ -229,8 +229,10 @@ public class SocialNetwork {
 		
 	
 		//__ItemFilmAlreadyExists__\\
-			if (isItemFilm(titre)) throw new ItemFilmAlreadyExists ("Un film avec un titre identique existe déjà");
-		
+			for (Item item : items){
+				if (item instanceof ItemFilm && item.isItem(titre)) throw new ItemFilmAlreadyExists ("Un film avec un titre identique existe déjà");
+			}
+			
 		//__Ajout du film__\\
 			Item newFilm = new ItemFilm(titre, genre, realisateur, scenariste, duree);
 			items.add(newFilm);
@@ -306,9 +308,11 @@ public class SocialNetwork {
 				if (findMember.isPassword(password)==false) throw new NotMember ("Le couple pseudo/password est incorrect");
 			}
 		
-		//__ItemFilmAlreadyExists__\\
-			if (isItemBook(titre)) throw new ItemBookAlreadyExists ("Un livre avec un titre identique existe déjà");
-		
+		//__ItemBookAlreadyExists__\\
+			for (Item item : items){
+				if (item instanceof ItemBook && item.isItem(titre)) throw new ItemBookAlreadyExists ("Un livre avec un titre identique existe déjà");
+			}
+			
 		//__Ajout du livre__\\
 			ItemBook newBook = new ItemBook(titre, genre, auteur, nbPages);
 			items.add(newBook);
@@ -329,12 +333,23 @@ public class SocialNetwork {
 	public LinkedList <String> consultItems(String nom) throws BadEntry, NotItem {
 		
 		//___Bad Entry___\\
+		
 		// - nom : doit être différent de null ou avec au moins un caractère autre que des espaces
 		if (nom==null) throw new BadEntry("Le nom n'est pas instancié");
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		nom = nom.trim().toLowerCase();
 		if(nom.length()<1) throw new BadEntry("Le nom doit contenir au moins un caractère autre que des espaces");
-		if((!isItemBook(nom))&&(!isItemFilm(nom))) throw new NotItem ("Aucun item ne correspond à la recherche");
+		
+		boolean isbook=false;
+		boolean isfilm=false;
+		for (Item item : items){
+			if (item instanceof ItemBook && item.isItem(nom)) isbook=true;
+		}
+		for (Item item : items){
+			if (item instanceof ItemFilm && item.isItem(nom)) isfilm=true;
+		}
+		if(!isbook && !isfilm) throw new NotItem ("Aucun item ne correspond à la recherche");
+		
 		LinkedList<String> itemsFindList = new LinkedList<String>();		
 		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
 			if (item.getTitre().trim().toLowerCase().equals(nom.trim().toLowerCase())) itemsFindList.add(item.titre + " - note moyenne : " + item.averageRating + item.reviews.toString());
@@ -409,8 +424,12 @@ public class SocialNetwork {
 			}
 	
 		//__NotItem__\\
-			if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
-		
+			boolean isfilm=false;
+			for (Item item : items){
+				if (item instanceof ItemFilm && item.isItem(titre)) isfilm=true;
+			}
+			if(!isfilm) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
+			
 		//__Ajout du review__\\
 		
 			float tempAverageRating = 0.0f;
@@ -504,8 +523,12 @@ public class SocialNetwork {
 			}
 	
 		//__NotItem__\\
-			if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
-		
+			boolean isbook=false;
+			for (Item item : items){
+				if (item instanceof ItemBook && item.isItem(titre)) isbook=true;
+			}
+			if(!isbook) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
+			
 		//__Ajout du review__\\
 
 			float tempAverageRating = 0.0f;
@@ -598,7 +621,11 @@ public class SocialNetwork {
 		
 		if (type=="livre"){
 			//__NotItem__\\
-			if (!isItemBook(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
+			boolean isbook=false;
+			for (Item item : items){
+				if (item instanceof ItemBook && item.isItem(titre)) isbook=true;
+			}
+			if(!isbook) throw new NotItem ("Le titre entré n'est pas celui d'un livre existant");
 			
 			for (Item itembook : items){
 				if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook){
@@ -622,7 +649,11 @@ public class SocialNetwork {
 		}
 		if (type=="film"){
 			//__NotItem__\\
-			if (!isItemFilm(titre)) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
+			boolean isfilm=false;
+			for (Item item : items){
+				if (item instanceof ItemFilm && item.isItem(titre)) isfilm=true;
+			}
+			if(!isfilm) throw new NotItem ("Le titre entré n'est pas celui d'un film existant");
 			
 			for (Item itemfilm : items){
 				if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm){
@@ -676,35 +707,7 @@ public class SocialNetwork {
 				+ "___Liste des films enregistrés___ "+filmList.toString() + "\n"
 				);
 	}
-
 	
-	/**
-	 * Permet de savoir si l'item film est déjà présent dans la liste des items films du réseau social
-	 * @param titre
-	 * @return True si l'item est déjà enregistré sur le réseau social / False sinon
-	 */
-	private boolean isItemFilm(String titre){
-		//Comparaison des titres de film pour voir si l'item est déjà présent dans la liste
-		for (Item itemfilm : items){
-			if (itemfilm.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itemfilm instanceof ItemFilm) return true;
-		}
-		return false;
-	}
-	
-	/**
-	 * Permet de savoir si l'item book est déjà présent dans la liste des items books du réseau social
-	 * @param titre
-	 * @return True si l'item est déjà enregistré sur le réseau social / False sinon
-	 */
-	private boolean isItemBook(String titre){
-		//Comparaison des titres de book pour voir si l'item est déjà présent dans la liste
-		for (Item itembook : items){
-			if (itembook.getTitre().trim().toLowerCase().equals(titre.trim().toLowerCase()) && itembook instanceof ItemBook) return true;
-		}
-		return false;
-	}
-
-
 	/**
 	 * Permet d'obtenir le karma du membre grâce au pseudo			
 	 * @param pseudo

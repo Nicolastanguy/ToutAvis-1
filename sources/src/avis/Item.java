@@ -116,6 +116,17 @@ public abstract class Item {
 	}
 	
 	/**
+	 * Vérifie si le titre passé en paramètre correspond à celui de l'item
+	 * 
+	 * @param titre titre recherché
+	 * @return true sur le titre correspond, false sinon
+	 */
+	public boolean isItem(String titre){
+		if(titre.trim().toLowerCase().equals(this.titre.trim().toLowerCase())) return true;
+		else return false;
+	}
+	
+	/**
 	 * Accesseur du titre de l'item
 	 * 
 	 * @return le titre de l'item
