@@ -640,11 +640,7 @@ public class SocialNetwork {
 				}
 			}
 			//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
-			for (Member member : members){
-				if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
-					member.karmaUpdate(note);
-				}
-			}
+			findMember2.karmaUpdate(note);				
 			return tempNoteReview;
 		}
 		if (type=="film"){
@@ -668,18 +664,12 @@ public class SocialNetwork {
 				}
 			}
 			//Mise à jour du Karma de l'utilisateur dont l'avis a été noté
-			for (Member member : members){
-				if (member.getPseudo().trim().toLowerCase().equals(pseudo2.trim().toLowerCase())){
-					member.karmaUpdate(note);
-				}
-			}
+			findMember2.karmaUpdate(note);
 			return tempNoteReview;
 		}
 		else {
 			throw new BadEntry("le type est différent de film ou de book");
 		}
-		
-			
 	}
 
 	/**

@@ -78,13 +78,7 @@ public class Member {
 		return pseudo;
 	}
 	
-	/**
-	 * Accesseur du password
-	 * @return
-	 */
-	public String getPassword(){
-		return password;
-	}
+	
 	/**
 	 * Accesseur du karma
 	 * @return
