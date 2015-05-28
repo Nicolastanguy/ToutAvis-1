@@ -180,19 +180,19 @@ public class TestReviewOpinions {
 		
 		//Un membre tente de noter un avis qu'il à déjà noté
 		nbTests++; 
-		nbErreurs += reviewOpinionsMemberAlreadyOpinion(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.1e"," Erreur : un membre à noté un avis qu'il avait déjà noté");
+		nbErreurs += reviewOpinionsMemberAlreadyOpinion(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.2"," Erreur : un membre à noté un avis qu'il avait déjà noté");
 		
 		
 		//Un membre tente de noter ses propres avis
 		nbTests++; 
-		nbErreurs += reviewOpinionsSameMember(sn,"personne1","psw1","Arts martiaux","livre","personne1",1.0F,"10.1f"," Erreur : un membre a noté son propre avis");
+		nbErreurs += reviewOpinionsSameMember(sn,"personne1","psw1","Arts martiaux","livre","personne1",1.0F,"10.3"," Erreur : un membre a noté son propre avis");
 		
 		//Vérifier que le karma des utilisateur à bien une influence sur un avis qu'il poste
 		//personne 1 a un karma de 2.825 après les précédentes opérations
 		//personne 1 poste un avis sur un livre que personne2 a déjà commenté
 		//On vérifie que la moyenne de l'item a bien été modifiée en tenant compte du karma de personne1
 		nbTests++; //3,826 de moy attendue
-		nbErreurs += reviewOpinionKarmaTestFilm(sn,"personne1","psw1","Le Seigneur des anneaux",5.0F,"10.1g"," Erreur : le karma de semble pas influencer la note mise par l'utilisateur", 3.826F);
+		nbErreurs += reviewOpinionKarmaTestFilm(sn,"personne1","psw1","Le Seigneur des anneaux",5.0F,"10.4"," Erreur : le karma de semble pas influencer la note mise par l'utilisateur", 3.826F);
 		
 		
 		
