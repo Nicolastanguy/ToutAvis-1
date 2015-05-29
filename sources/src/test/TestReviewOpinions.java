@@ -3,13 +3,12 @@ package test;
 import exception.*;
 import avis.SocialNetwork;
 import test.TestCreationSN;
-import avis.Member;
 
 public class TestReviewOpinions {
 	
-	public static int reviewOpinionsBadEntryTest(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
+	public static int reviewOpinionBadEntryTest(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
 		try {
-			sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);
+			sn.reviewOpinion(pseudo1, password, titre, type, pseudo2, note);
 			System.out.println(idTest+messErreur);
 			return 1;
 		}
@@ -22,9 +21,9 @@ public class TestReviewOpinions {
 		}	
 	}
 	
-	public static int reviewOpinionsMemberAlreadyOpinion(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
+	public static int reviewOpinionMemberAlreadyOpinion(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
 		try {
-			sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);
+			sn.reviewOpinion(pseudo1, password, titre, type, pseudo2, note);
 			System.out.println(idTest+messErreur);
 			return 1;
 		}
@@ -37,9 +36,9 @@ public class TestReviewOpinions {
 		}	
 	}
 	
-	public static int reviewOpinionsSameMember(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
+	public static int reviewOpinionSameMember(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,String messErreur){
 		try {
-			sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);
+			sn.reviewOpinion(pseudo1, password, titre, type, pseudo2, note);
 			System.out.println(idTest+messErreur);
 			return 1;
 		}
@@ -51,6 +50,7 @@ public class TestReviewOpinions {
 			return 1;
 		}	
 	}
+	
 	public static int reviewOpinionKarmaTestFilm(SocialNetwork sn,String pseudo1, String password,String titre,float note,String idTest,String messErreur, float moyenneAttendue){
 		try {
 			float moyenne;			
@@ -71,11 +71,10 @@ public class TestReviewOpinions {
 		}	
 	}
 	
-	
-	public static int reviewOpinionsOkTest(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,float karmaAttendu, float moyenneAttendue){
+	public static int reviewOpinionOkTest(SocialNetwork sn,String pseudo1, String password,String titre,String type,String pseudo2, float note,String idTest,float karmaAttendu, float moyenneAttendue){
 		try {
 			float moyenneReview;
-			moyenneReview = sn.reviewOpinions(pseudo1, password, titre, type, pseudo2, note);
+			moyenneReview = sn.reviewOpinion(pseudo1, password, titre, type, pseudo2, note);
 			
 			if(moyenneAttendue!=moyenneReview){
 				System.out.println(idTest+" La moyenne du review ne correspond pas à la moyenne attendue");
@@ -97,10 +96,7 @@ public class TestReviewOpinions {
 			return 1;
 		}	
 	}
-
 	
-	// reviewOpinions(String pseudo1, String password,String titre,String type,String pseudo2, float note)
-
 	public static void sequenceTestReviewOpinions()throws BadEntry, MemberAlreadyExists, NotMember, ItemBookAlreadyExists, ItemFilmAlreadyExists, NotItem, MemberAlreadyOpinion{
 		
 		System.out.println("Tests noter les avis/notion de karma (lot2)");
@@ -112,9 +108,6 @@ public class TestReviewOpinions {
 		catch (Exception e) {
 			System.out.println("Erreur lors de la création du SN de test");
 		}
-		
-		int nbMembers = sn.nbMembers();
-		int nbBooks = sn.nbBooks();
 
 		int nbTests = 0;
 		int nbErreurs = 0;		
@@ -122,31 +115,31 @@ public class TestReviewOpinions {
 		// <=> Fiche 9 : Eprouver la méthode reviewOpinions sur les cas d’anomalies BadEntry.
 		// 9.1 : reviewOpinions avec en paramètre un pseudo non instancié 
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,null,"psw2","Arts martiaux","book","Personne1",3.0F,"9.1a"," L'ajout d'une note à un avis a été accepté avec un pseudo1 non instancié"); 
+		nbErreurs += reviewOpinionBadEntryTest(sn,null,"psw2","Arts martiaux","livre","Personne1",3.0F,"9.1a"," L'ajout d'une note à un avis a été accepté avec un pseudo1 non instancié"); 
 		nbTests++;
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"   ","psw2","Arts martiaux","book","Personne1",3.0F,"9.1b"," L'ajout d'une note à un avis a été accepté avec un pseudo1 ne contenant que des espaces");
+		nbErreurs += reviewOpinionBadEntryTest(sn,"   ","psw2","Arts martiaux","livre","Personne1",3.0F,"9.1b"," L'ajout d'une note à un avis a été accepté avec un pseudo1 ne contenant que des espaces");
 		nbTests++;
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2","Arts martiaux","book",null,3.0F,"9.1c"," L'ajout d'une note à un avis a été accepté avec un pseudo2 non instancié");
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","psw2","Arts martiaux","livre",null,3.0F,"9.1c"," L'ajout d'une note à un avis a été accepté avec un pseudo2 non instancié");
 		nbTests++;
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2","Arts martiaux","book","   ",3.0F,"9.1d"," L'ajout d'une note à un avis a été accepté avec un pseudo2 ne contenant que des espaces");
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","psw2","Arts martiaux","livre","   ",3.0F,"9.1d"," L'ajout d'une note à un avis a été accepté avec un pseudo2 ne contenant que des espaces");
 		// 9.2: reviewOpinions avec en paramètre un password non instancié ou a moins de 4 caractères autres que des leadings or trailing blanks.
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2",null,"Arts martiaux","book","Personne1",3.0F,"9.2a"," L'ajout d'une note à un avis a été accepté avec un password non instancié"); 
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2",null,"Arts martiaux","livre","Personne1",3.0F,"9.2a"," L'ajout d'une note à un avis a été accepté avec un password non instancié"); 
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","  p   ","Arts martiaux","book","Personne1",3.0F,"9.2a"," L'ajout d'une note à un avis a été accepté avec un password au format incorrect"); 
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","  p   ","Arts martiaux","livre","Personne1",3.0F,"9.2a"," L'ajout d'une note à un avis a été accepté avec un password au format incorrect"); 
 		// 9.3: reviewOpinions avec en paramètre un titre non instancié ou qui a moins de 1 caractère autre que des espaces.
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2",null,"book","Personne1",3.0F,"9.3a"," L'ajout d'une note à un avis a été accepté avec un titre non instancié"); 
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","psw2",null,"livre","Personne1",3.0F,"9.3a"," L'ajout d'une note à un avis a été accepté avec un titre non instancié"); 
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2","    ","book","Personne1",3.0F,"9.3b"," L'ajout d'une note à un avis a été accepté avec un titre ne contenant que des espaces"); 
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","psw2","    ","livre","Personne1",3.0F,"9.3b"," L'ajout d'une note à un avis a été accepté avec un titre ne contenant que des espaces"); 
 		// 9.4: reviewOpinions avec une note non comprise entre 0.0 et 5.0.
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2","Arts martiaux","book","Personne1",9.0F,"9.4"," L'ajout d'une note à un avis a été accepté avec une note non comprise entre 0 et 5"); 
-		// 9.5: reviewOpinions avec un type non instancié ou différent de « book » ou « film ».
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","psw2","Arts martiaux","livre","Personne1",9.0F,"9.4"," L'ajout d'une note à un avis a été accepté avec une note non comprise entre 0 et 5"); 
+		// 9.5: reviewOpinions avec un type non instancié ou différent de « livre » ou « film ».
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2","Arts martiaux",null,"Personne1",3.0F,"9.5a"," L'ajout d'une note à un avis a été accepté avec un type non instancié"); 
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","psw2","Arts martiaux",null,"Personne1",3.0F,"9.5a"," L'ajout d'une note à un avis a été accepté avec un type non instancié"); 
 		nbTests++; 
-		nbErreurs += reviewOpinionsBadEntryTest(sn,"Personne2","psw2","Arts martiaux","typeincorrect","Personne1",3.0F,"9.5b"," L'ajout d'une note à un avis a été accepté avec un type différent de book ou de film"); 
+		nbErreurs += reviewOpinionBadEntryTest(sn,"Personne2","psw2","Arts martiaux","typeincorrect","Personne1",3.0F,"9.5b"," L'ajout d'une note à un avis a été accepté avec un type différent de livre ou de film"); 
 		
 		// <=> Fiche 10 : Eprouver la méthode reviewOpinions dans le cas d’un fonctionnement standard.
 		
@@ -170,22 +163,22 @@ public class TestReviewOpinions {
 		
 		//personne2 et personne3 notent des avis de personne1 Verif Karma + moyenne review
 		nbTests++; 
-		nbErreurs += reviewOpinionsOkTest(sn,"personne2","psw2","Arts martiaux","livre","personne1",3.0F,"10.1a",3.0F,3.0F); 
+		nbErreurs += reviewOpinionOkTest(sn,"personne2","psw2","Arts martiaux","livre","personne1",3.0F,"10.1a",3.0F,3.0F); 
 		nbTests++; 
-		nbErreurs += reviewOpinionsOkTest(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.1b",2.0F,2.0F); 
+		nbErreurs += reviewOpinionOkTest(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.1b",2.0F,2.0F); 
 		nbTests++; 
-		nbErreurs += reviewOpinionsOkTest(sn,"personne2","psw2","La Chine","livre","personne1",5.0F,"10.1c",3.0F,5.0F); 
+		nbErreurs += reviewOpinionOkTest(sn,"personne2","psw2","La Chine","livre","personne1",5.0F,"10.1c",3.0F,5.0F); 
 		nbTests++; 
-		nbErreurs += reviewOpinionsOkTest(sn,"personne3","psw3","La Chine","livre","personne1",2.3F,"10.1d",2.825F,3.65F); 
+		nbErreurs += reviewOpinionOkTest(sn,"personne3","psw3","La Chine","livre","personne1",2.3F,"10.1d",2.825F,3.65F); 
 		
 		//Un membre tente de noter un avis qu'il à déjà noté
 		nbTests++; 
-		nbErreurs += reviewOpinionsMemberAlreadyOpinion(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.2"," Erreur : un membre à noté un avis qu'il avait déjà noté");
+		nbErreurs += reviewOpinionMemberAlreadyOpinion(sn,"personne3","psw3","Arts martiaux","livre","personne1",1.0F,"10.2"," Erreur : un membre à noté un avis qu'il avait déjà noté");
 		
 		
 		//Un membre tente de noter ses propres avis
 		nbTests++; 
-		nbErreurs += reviewOpinionsSameMember(sn,"personne1","psw1","Arts martiaux","livre","personne1",1.0F,"10.3"," Erreur : un membre a noté son propre avis");
+		nbErreurs += reviewOpinionSameMember(sn,"personne1","psw1","Arts martiaux","livre","personne1",1.0F,"10.3"," Erreur : un membre a noté son propre avis");
 		
 		//Vérifier que le karma des utilisateur à bien une influence sur un avis qu'il poste
 		//personne 1 a un karma de 2.825 après les précédentes opérations

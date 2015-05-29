@@ -330,7 +330,7 @@ public class SocialNetwork {
 	 * Cette représentation contiendra la note de l'item s'il a été noté.
 	 * (une liste vide si aucun item ne correspond) 
 	 */
-	public LinkedList <String> consultItems(String nom) throws BadEntry, NotItem {
+	public LinkedList <String> consultItems(String nom) throws BadEntry {
 		
 		//___Bad Entry___\\
 		
@@ -339,16 +339,6 @@ public class SocialNetwork {
 		//On retire les blanks du pseudo avec trim() et on met en miniscule avec toLowerCase
 		nom = nom.trim().toLowerCase();
 		if(nom.length()<1) throw new BadEntry("Le nom doit contenir au moins un caractère autre que des espaces");
-		
-		boolean isbook=false;
-		boolean isfilm=false;
-		for (Item item : items){
-			if (item instanceof ItemBook && item.isItem(nom)) isbook=true;
-		}
-		for (Item item : items){
-			if (item instanceof ItemFilm && item.isItem(nom)) isfilm=true;
-		}
-		if(!isbook && !isfilm) throw new NotItem ("Aucun item ne correspond à la recherche");
 		
 		LinkedList<String> itemsFindList = new LinkedList<String>();		
 		for(Item item : items){  //recherche d'un titre correspondant à la recherche dans la liste d'items
@@ -562,7 +552,7 @@ public class SocialNetwork {
 	 * @param pseudo2 pseudo du membre ayant posté l'avis
 	 * @param note note donnée à l'avis
 	 */
-	public float reviewOpinions(String pseudo1,String password,String titre,String type,String pseudo2,float note) throws BadEntry, NotMember, NotItem, NotReview, MemberAlreadyOpinion, SameMember{
+	public float reviewOpinion(String pseudo1,String password,String titre,String type,String pseudo2,float note) throws BadEntry, NotMember, NotItem, NotReview, MemberAlreadyOpinion, SameMember{
 		Member findMember1 = null;
 		Member findMember2 = null;
 		//___Bad Entry___\\

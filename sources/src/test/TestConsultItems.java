@@ -1,8 +1,9 @@
 package test;
 
+import java.util.LinkedList;
+
 import avis.SocialNetwork;
 import exception.BadEntry;
-import exception.NotItem;
 
 public class TestConsultItems {
 	
@@ -24,23 +25,16 @@ public class TestConsultItems {
 	
 	public static int consultItemsOKTest (SocialNetwork sn, String nom, String idTest){
 		try{
-			sn.consultItems (nom);
-			return 0;
-		}
-		catch (Exception e) {
-			System.out.println ("Test " + idTest + " : exception non prévue. " + e); 
-			e.printStackTrace();
-			return 1;
-		}		
-	}
-	
-	public static int consultItemsNotItemTest (SocialNetwork sn, String nom, String idTest, String messErreur){
-		try{
-			sn.consultItems (nom);
-			System.out.println ("Test " + idTest + " : " + messErreur);
-			return 1;
-		}
-		catch (NotItem e) {
+			LinkedList<String> itemsFindList = new LinkedList<String>();
+			itemsFindList = sn.consultItems (nom);
+			
+			if(nom=="ItemInexistant"){
+				if(itemsFindList.size()!=0){
+					System.out.println(idTest+" La liste retournée n'est pas vide quand on cherche un item inexistant");
+					return 1;
+				}
+			}
+			
 			return 0;
 		}
 		catch (Exception e) {
@@ -92,7 +86,7 @@ public class TestConsultItems {
 		
 		// consultation d'un item inexistant
 		nbTests++;
-		nbErreurs += consultItemsNotItemTest ( sn, "ItemInexistant", "12.4c","La consultation d'un inexistant de déclenche pas d'exception");
+		nbErreurs += consultItemsOKTest ( sn, "ItemInexistant", "12.4c");
 		
 		TestSocialNetwork.nbTests++;
 		if (sn.nbMembers()!=nbMembers){
